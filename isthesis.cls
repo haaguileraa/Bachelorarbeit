@@ -197,7 +197,7 @@
 	\isthesis@new@option{label-submission}{label@submission}{Submission}
 	\isthesis@new@option{label-atthe}{label@atthe}{at the}
 	\isthesis@new@option{label-context}{label@context}{in the context of the seminar}
-	\isthesis@new@option{secondary-logo}{secondary@logo}{assets/institut.pdf}
+	\isthesis@new@option{secondary-logo}{secondary@logo}{assets/Logo_LHFT_DE-2-3}
 	\newcommand{\listabbreviationname}{Abbreviations}
 	\newcommand{\listsymbolname}{Symbols}
 	\newcommand{\authorshipstatementname}{Declaration of Academic Integrity}
@@ -239,7 +239,7 @@
 	\isthesis@new@option{label-submission}{label@submission}{Abgabetermin}
 	\isthesis@new@option{label-atthe}{label@atthe}{am}
 	\isthesis@new@option{label-context}{label@context}{im Rahmen des Seminars}
-	\isthesis@new@option{secondary-logo}{secondary@logo}{assets/institut.pdf}
+	\isthesis@new@option{secondary-logo}{secondary@logo}{assets/Logo_LHFT_DE-2-3}
 	\newcommand{\listsymbolname}{Symbolverzeichnis}
 	\newcommand{\listabbreviationname}{Abk\"urzungsverzeichnis}
 	\newcommand{\authorshipstatementname}{Abschlie{\ss}ende Erkl\"arung}
@@ -623,7 +623,7 @@
 } 
 
 % Customizable logos on title page
-\isthesis@new@option{primary-logo}{primary@logo}{assets/Logo_FB-WW_DinA0_4C}
+\isthesis@new@option{primary-logo}{primary@logo}{assets/fau_logo}
 \isthesis@new@option{primary-logo-height}{primary@logo@height}{18mm}
 % Secondary logo is language dependent and defined above
 \isthesis@new@option{secondary-logo-height}{secondary@logo@height}{16mm}
