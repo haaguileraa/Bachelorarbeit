@@ -1,19 +1,74 @@
 \chapter{Introduction}
-Objective:
-Develop a tool for the future students who will study nonlinear optics in fibres so that they can appreciate more easily the different physical processes happening to a short pulse propagating in a dispersive nonlinear medium. These include the influence of the dispersion (second and third order), the self-phase modulation, the emission of dispersive wave, the soliton dynamics. Eventually, the code will be released as a web-interface for the future students to directly modify the physical parameters of the pulse, but also of the fibre.**
+% Objective:
+% Develop a tool for the future students who will study nonlinear optics in fibres so that they can appreciate more easily the different physical processes happening to a short pulse propagating in a dispersive nonlinear medium. These include the influence of the dispersion (second and third order), the self-phase modulation, the emission of dispersive wave, the soliton dynamics. Eventually, the code will be released as a web-interface for the future students to directly modify the physical parameters of the pulse, but also of the fibre.**
+
+The actual state of communications leads to new challenges in the field of optical systems, which causes an increased interest from students in optical communications. Nonlinear optics in fibers involve different physical processes while a short pulse propagates in a dispersive nonlinear medium. 
+
+
+IMPORTANCE AND WHY SHORT PULSES? SOME DEVELOPMENTS OR SINCE WHEN THEY ARE USED
+
+
+Effects like the influence of second or third-order dispersion, self-phase modulation, the emission of a dispersive wave, or the soliton dynamics are some of the topics of this thesis. The main objective is to use the existing theory and create a code capable of simulating these effects and then deploy it online to provide an accessible way for students (or people interested in understanding the concepts surrounding nonlinear optics) to recapitulate the theory seen in the lecture. The third chapter explains the development and deployment of a tool using the created code. \textbf{**ADD Method of feedback**} 
+
+At the same time, it is pertinent to understand some of the necessities of the students who will be the final users of the tool created. This interactive service should be able to adapt itself to be a good add-on and aid the professors with their explanations throughout the semester. Hence those who take the lectures can explore what usually is on the blackboard or the books and interact with plots and solutions of equations going further than just replacing values in an equation and waiting for it to be correct. Here is when Interactive Learning and its advantages obtain relevance and thus bestow meaning to the core of this project.
+
+\section{Background: Constructivism and other theories of education}
+\subsection{Constructivism}
+Constructivism is a theory of cognition that proposes using unconventional instruction methods to fulfill the ever-active process of learning while not ignoring the idea that students are individuals who may perceive the learning environment in a different way than how the teachers intend to present it. Moreover, according to \cite{fosnot2013constructivism}, "the task of the educator is not to dispense knowledge but to provide students with opportunities and incentives to build it up;" that means adapting to the diverse forms of thinking instead of assuming that the students will acquire this knowledge just from the means already given.
+
+
+\subsection{E-Learning}
+The increasing quantity of online, partially online, or presential courses with strong online interactions strives to supply the necessity from a generation of students (with a strong influence of technology and social networks) to incorporate E-Learning in the teaching methods and the learning environments.  According to \cite{vltool}: "interactivity is a key feature of online education which helps attract and retain students in online classes," thus applying visual learning tools together with an online learning experience can develop engagement and motivation in the learning process in students. 
+
+One can refer then to E-Learning as "the use of both software-based and online learning"  \cite{tabak} and, according to \cite{tabak}, \cite{munoz}, it has to be flexible, accessible, and intuitive. Hence factors like clear instructions, the relevance of the topics, the requirements to use its tools, and the difficulty to use them are crucial to implementing E-learning in different courses for different levels of education.
+
+\section{Background: Interactive Learning tools}
+
+Enhancing the students' learning experience regardless of the education level can be achieved using different interactive E-Learning tools, e.g., Web sites like Mathweb or mobile apps like I-MMAAPS. The interface of the interactive and personalizable content of these tools is essential to create a successful and effective tool \cite{vltool}. Therefore it should also be taken into account while creating an interactive E-Learning tool. Chapters 1 and 2 discuss how the interface was designed  and how a group of students perceived it.\textbf{ (give more details at the end of the project). }
 
 
 
-This \LaTeX \- template has been developed by the University of M\"unster and adapted by the Chair of Digital Industrial Service Systems at the \gls{FAU} to match the \gls{FAU} \gls{CD}. The file \path{main.tex} is the master file.
+\subsection{examples of Interactive Learning tools}
+To know more about interactive learning is imperative to look at previous works and how they can contribute to the creation of new tools like the one discussed in this thesis.
 
-It was originally built by  Jan Betzing and Dominik Lekse and draws from the DBIS template by Till Haselmann and Florian Stahl, as well as from the IS template by Stephan Dlugosz. The adaption to FAU was done by Matthias Stierle. Currently, Sebastian Dunzer maintains the template.
+\subsubsection{Mathweb}
+The Hochschule Ruhr West has developed a website named \href{https://mathweb.de/}{"Mathweb"}   to support the students during the semester and preparation for the exams. According to surveys,  students underestimate the continuous study (during and after evaluations), among other problems related to learning strategies, that led to the endorsement of this Web amongst the students who, after the trial period, see it as a helpful tool and perceive a positive impact in their studies \cite{MathWeb}.
 
-This document is work-in-progress and provides instructions on how to use the template. It does not give advices on scientific writing.
+On this website are available a wide variety of examples, interactive demonstrations with graphics, explanations, exercises, and the option to check if the solution given by the user is correct. The themes included going from simple mathematical operations to more complex topics like derivatives are available for everyone, even though the test course cannot be accessed signed in as a guest.
 
-Please feel free to contribute to this template.
+\subsubsection{I-IMAPPS}
 
-\paragraph{TODO}
-\begin{itemize}
-	\item Configuration switch for having \textbackslash chapter\{\} begin on a new page
-	\item Replace \texttt{kvoptions} with \texttt{pgfkeys}
-\end{itemize}
+I-IMAPPS is an application created at the Universiti Teknologi MARA Sarawak in Malaysia and aimed to promote the learning of the indigenous Iban language using situations immerse in possible environments where its use is necessary. The researchers worked based on constructivism and the premise that mobile learning is an alternative to study a language if the people do not have the time for intensive or immersive lessons. 
+
+
+To develop and structure this app, they followed the ADDIE Model, which consists of five aspects: 
+
+\begin{enumerate}
+    \item Analysis: gathering and selecting the information, phrases, and vocabulary of the Iban language; investigation on the availability (if there are existing apps created for this purpose, which is not the case) and focus on the learning objectives of the mobile app.
+    \item Design: description of the message to send and the user interaction with the content, layout, and storyboard design focused on the cultural aspects of this language. The content framework comprehends the resources (multimedia elements like text, audio animations, etc.), learning theories allowing the user to work autonomously, and interactivity.
+    
+    \item Development: the researchers used Flash for the animations, Photoshop CS5  for the illustrations, and Corona SDK for software engineering. 
+
+    
+    \item Implementation.
+    
+    \item Evaluation: 30 non-native speakers tested the I-MMAPPS prototypes, did a test of the new knowledge obtained, and gave feedback on the experience using them.
+    
+\end{enumerate}
+
+The conclusion of this research points that this app helps developing interest and assists non-native speakers at the early stages of learning this language. Further work needs to be done to improve the app's features \cite{CHACHIL2015267}. 
+
+
+
+\subsubsection{Control courses}
+Björn Wittenmark, Helena Haglund, and Mikael Johansson at Lund Institute of Technology used interactive learning and dynamic pictures to aid the students while learning abstract parts of the theory in control courses. The goal was not just to have students with a solid theoretical understanding of the topics but also to have high engineering capabilities; this relies on the good connection of the theory by improving the comprehension of the students and the practical aspect of the problems presented. One way to achieve this is with material available "anywhere and anytime" using the web and Matlab and Simulink for the computations. 
+
+They implemented dynamic pictures where the user can see the effect of, e.g., changing a parameter in continuous-time poles and zeroes plots without typing commands. Drags, dropdowns, text input slots, and buttons enhance the graphical interface of the CCSDEMO. This tool makes active learning possible covering topics like robustness, tuning of PID-controllers, observability, among other subjects of the 13 available modules. They highlight the idea that it is meaningful to design the interface carefully to allow an intuitive use avoiding the need to read a manual and contributing to the utilization without supervision.
+
+In conclusion, dynamic pictures improve the courses giving the students more tools than just pre-canned video or static data and illustrations, motivating the students who responded encouragingly \cite{IEEEcontrol}.
+
+
+
+\subsubsection{Fiber-Modes App}
+
+As previous work

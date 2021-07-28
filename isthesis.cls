@@ -108,7 +108,7 @@
 
 % Customizing of citations in the text
 \RequirePackage[
-    style=apa,
+    style=ieee,%apa
     backend=biber,
     natbib=true]
     {biblatex}
