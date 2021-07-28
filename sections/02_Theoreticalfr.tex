@@ -21,29 +21,148 @@ Loss and dispersion originated by interactions of the electromagnetic field with
         \end{equation}
 
     where: 
-\begin{itemize}
-    \item t is the time variable [s]
-    \item z is the space variable [m]
-    \item $alpha$ is the attenuation coefficient [1/m]
-    \item $beta_n$ are propagation constant coefficients $[s^n/m]$
-    \item $\gamma$ is the nonlinear parameter [1/Wm]
-    \item R(t) is the response function that includes electronic and vibrational contributions [1/s]
-        \begin{equation}
-            \gamma = \frac{n_2 \omega_0}{c A_{eff}}
-            \label{eq_gamma}
+    \begin{itemize}
+        \item t is the time variable [s]
+        \item z is the space variable [m]
+        \item $alpha$ is the attenuation coefficient [1/m]
+        \item $beta_n$ are propagation constant coefficients $[s^n/m]$
+        \item $\gamma$ is the nonlinear parameter [1/Wm]
+        
+            \begin{equation}
+                \gamma = \frac{n_2 \omega_0}{c A_{eff}},
+                \label{eq_gamma}
+            \end{equation}
+        with $n_2 \ [m^2/W]$ is the nonlinear refractive index, and $A_{eff}$  is the  effective core area.
+        %or  n2 is the nonlinear-index coefficient. 
+        \item R(t) [1/s] is the response function that includes electronic and vibrational contributions and is approximated by 
+        
+        \begin{equation}\label{eq_rt}
+            R(t) = (1- f_R)\delta(t) + f_R h_R(t),
         \end{equation}
-    with $n_2 \ [m^2/W]$ is the nonlinear refractive index, and $A_{eff}$  is the  effective core area.
-    %or  n2 is the nonlinear-index coefficient. 
-    \item 
-\end{itemize}
+        where $f_R$ and $h_R(t)$ are the fractional contribution of the delayed Raman response and the Raman response function, respectively. Conforming to \cite{dudley_taylor_2010}, 
+        \begin{equation}\label{eq_hr}
+            h_R = \frac{\tau^2_1+\tau^2_2}{\tau_1\tau^2_2} exp(-t/\tau_2)sin(t/\tau_1)\Theta(t),
+        \end{equation}
+        here $\delta(t)$ and $\Theta(t)$ are the Delta Dirac and the Heaviside step functions, respectively; $f_R = 0.18$,  $\tau_1 =12.2 fs$, and $\tau_2 = 32 fs$.
+         
+         
+        \item $\omega_0$  is the center angular frequency
+    
+    \end{itemize}
+   
+    One can asume that the evolution of the envelope pulse is slow, and remembering that the group velocity is defined by 
+    
+    \begin{equation}\label{eq_vg}
+        v_g \equiv \frac{1}{\beta_1}, 
+    \end{equation}
+    the pulse can be moved at the group velocity using the reference frame 
+    \begin{equation}\label{eq_t}
+        T = t - \frac{z}{v_g}. 
+    \end{equation}
+    
+    Thus, equation \eqref{eq_a} can be defined as 
+    
+    \begin{equation}\label{eq_b}
+        \frac{\partial A}{\partial z}=-\frac{\alpha}{2} - \frac{i \beta_2}{2} \frac{\partial^2 A}{\partial T^2} +\frac{\beta_3}{6} \frac{\partial^3 A}{\partial T^3} +i \gamma   \left(A\left|A\right|^2+ \frac{i}{\omega_0} \frac{\partial}{\partial T} (A\left|A \right|^2)- A \ T_R \frac{\partial \left|A \right|^2}{\partial T} \right),
+        \end{equation}
+    where the first moment of the nonlinear (Raman) response is
+    \begin{equation}\label{eq_TR}
+        T_R = f_R\int_{0}^{\infty} t \ h_R(t) \ dt.
+    \end{equation}
 
+        
+    \subsection{NLSE}
+        According to \citep{AgrawalBook}, the equation  \eqref{eq_b} for the slowly varying envelope can be simplified for pulses of width $T_0 > 5 ps$ to
+        \begin{equation}
+                \frac{\partial A}{\partial z} = \frac{\alpha}{2}A-j \frac{\beta_2}{2}\frac{\partial^2A}{\partial T^2}+j\gamma|A|^2 A,
+                \label{eq_nlse}
+            \end{equation}
+            \ \\
+       It is noteworthy that the contribution of the third-dispersion term should be considered if $\beta_2 \approx 0$ (zero-dispersion region). Equation \eqref{eq_nlse} is known as the nonlinear Schrödinger equation (NLSE).
+
+
+    \subsection{FFT}
+    
     \section{Modeling the short  pulse propagation}
     In order to have an easier understanding of the physical processes that are involved in the propagation of short pulses in a medium, it will be first necessary to focus on the dispersion that affects this medium. The purpose of this section is to consider the fiber as a linear optical medium while studying the pulse-propagation problem, thus, it is possible to inspect the effect of GVD under certain circumstances where it dominates over the nonlinearities \citep{ AgrawalBook}. A further objective of this thesis is to implement a code capable of illustrate the Dispersion-induced broadening of optical pulses for both Gaussian and Hyperbolic-Secant (Sech) shapes.
-    
-        \subsection{NLSE}
+
+        
+  
+            \begin{equation}\label{eq_A0}
+                A(z,\tau ) = \sqrt{P_0}e^{\frac{-\alpha z}{2}} U(z,\tau)
+            \end{equation}
+            with
+            \begin{equation}
+                \tau =  \frac{T}{T_0} = \frac{t-z/v_g}{T_0} \qquad
+            \end{equation}
+        
+        It is important to define relative lengths in order to understand the effect of the dispersion and/or nonlinearities on a pulse propagation.
+            \ \\
+            \ \\
+            \begin{equation}
+                L_D = \frac{T^2_0}{|\beta_2|} \qquad and \qquad L_{NL} = \frac{1}{\gamma P_0}
+            \end{equation}
+ 
         
         \subsection{Modeling the effect of GVD}
+        
+        Supposing a fiber length L such as $L \sim L_D$ and $L << L_{NL}$ and setting $\gamma = 0$: 
+            \begin{equation}
+                \frac{\partial U}{\partial z} = -j\frac{\beta_2}{2}\frac{\partial^2U}{\partial T^2}
+            \end{equation}
+            \ \\
+            \ \\
+            \begin{equation}
+                U(z,T) = FFT \left[ \widetilde{U}(0,\omega) \ exp\{j\frac{\beta_2}{2}\omega^2z\} \right]
+            \end{equation}
+            \ \\
+            \begin{equation}
+                \widetilde{U}(0,\omega)  = FFT^{-1} \left[ U(0,T)\right]
+            \end{equation}
+        
+        
+        \begin{equation}
+                U(0,T) = 
+                \begin{cases}
+                    exp \left\{ -\frac{T}{2T^2_0} \right\} \qquad \text{for Gaussian-shaped pulses}  \\
+                    sech\left( \frac{T}{T_0}\right) exp \left\{ -\frac{iCT^2}{2T^2_0} \right\} \qquad \text{for Hyperbolic-Secant pulses}  \\
+                \end{cases}
+            \end{equation}
+            \begin{center}
+                with $C =$  initial Chirp.
+            \end{center}
+            Having these equations and using \href{https://numpy.org/}{Numpy}, was written a code to plot the pulse evolution. This code allows the user to change values like $\beta_2$ to see how the dispersion causes a pulse broadening.
+        
+        
         \subsection{Modeling the effect of SPM}
+        
+        Now supposing a fiber length L such as $L \sim L_{NL}$ and $L << L_D$ and setting $\beta_2 = 0$, equation \eqref{nlse} becomes: 
+            \begin{equation}
+                \frac{\partial U}{\partial z} = j\frac{e^{-\alpha z}}{L_{NL}}|U|^2 U
+            \end{equation}
+            %seite 98
+            The phase shift can be defined as 
+            \begin{equation}
+                \phi_{NL}(L,T) = |U(0,T)|^2 (L_{eff}/L_{NL})
+            \end{equation}
+            with 
+            \begin{equation}
+                L_{eff} = \frac{1-e^{-\alpha L}}{\alpha}
+                \qquad if \quad alpha = 0 \text{, then} \quad L_{eff} = L
+            \end{equation}
+            
+            That allow us to introduce the SPM-induced chirp as
+            
+            \begin{equation}
+                \delta \omega(T) = -\frac{\partial \phi_{NL}}{\partial T} = -\left( \frac{L_{eff}}{L_{NL}} \right) \frac{\partial }{T} |U(0,T)|^2
+                \label{deltaomega}
+            \end{equation}
+        
+        
+         For a super-Gaussian pulse 
+            \begin{equation}
+                \delta \omega(T) = \frac{2m L_{eff}}{T_0 L_{NL}}\left( \frac{T}{T_0}\right)^{2m-1}  exp\left\{ -\left( \frac{T}{T_0}\right)^{2m}   \right\}
+            \end{equation}
         
         \subsection{Solution of the NLSE}
             \subsubsection{Dudley}
