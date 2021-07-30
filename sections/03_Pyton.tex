@@ -1,5 +1,93 @@
 \chapter{Creation of the Web-tool}
 
+ \section{Modeling the short  pulse propagation}
+    In order to have an easier understanding of the physical processes that are involved in the propagation of short pulses in a medium, it will be first necessary to focus on the dispersion that affects this medium. The purpose of this section is to consider the fiber as a linear optical medium while studying the pulse-propagation problem, thus, it is possible to inspect the effect of GVD under certain circumstances where it dominates over the nonlinearities \citep{ AgrawalBook}. A further objective of this thesis is to implement a code capable of illustrate the Dispersion-induced broadening of optical pulses for both Gaussian and Hyperbolic-Secant (Sech) shapes.
+
+        
+  
+            \begin{equation}\label{eq_A0}
+                A(z,\tau ) = \sqrt{P_0}e^{\frac{-\alpha z}{2}} U(z,\tau)
+            \end{equation}
+            with
+            \begin{equation}
+                \tau =  \frac{T}{T_0} = \frac{t-z/v_g}{T_0} \qquad
+            \end{equation}
+        
+        It is important to define relative lengths in order to understand the effect of the dispersion and/or nonlinearities on a pulse propagation.
+            \ \\
+            \ \\
+            \begin{equation}
+                L_D = \frac{T^2_0}{|\beta_2|} \qquad and \qquad L_{NL} = \frac{1}{\gamma P_0}
+            \end{equation}
+ 
+        
+        \subsection{Modeling the effect of GVD}
+   
+ 
+            
+        Supposing a fiber length L such as $L \sim L_D$ and $L << L_{NL}$ and setting $\gamma = 0$: 
+            \begin{equation}
+                \frac{\partial U}{\partial z} = -j\frac{\beta_2}{2}\frac{\partial^2U}{\partial T^2}
+            \end{equation}
+            \ \\
+            \ \\
+            \begin{equation}
+                U(z,T) = FFT \left[ \tilde{U}(0,\omega) \ exp\{j\frac{\beta_2}{2}\omega^2z\} \right]
+            \end{equation}
+            \ \\
+            \begin{equation}
+                \tilde{U}(0,\omega)  = FFT^{-1} \left[ U(0,T)\right]
+            \end{equation}
+        
+        
+        \begin{equation}
+                U(0,T) = 
+                \begin{cases}
+                    exp \left\{ -\frac{T}{2T^2_0} \right\} \qquad \text{for Gaussian-shaped pulses}  \\
+                    sech\left( \frac{T}{T_0}\right) exp \left\{ -\frac{iCT^2}{2T^2_0} \right\} \qquad \text{for Hyperbolic-Secant pulses}  \\
+                \end{cases}
+            \end{equation}
+            \begin{center}
+                with $C =$  initial Chirp.
+            \end{center}
+            Having these equations and using \href{https://numpy.org/}{Numpy}, was written a code to plot the pulse evolution. This code allows the user to change values like $\beta_2$ to see how the dispersion causes a pulse broadening.
+        
+        
+        \subsection{Modeling the effect of SPM}
+        
+        Now supposing a fiber length L such as $L \sim L_{NL}$ and $L << L_D$ and setting $\beta_2 = 0$, equation \eqref{eq_nlse} becomes: 
+            \begin{equation}
+                \frac{\partial U}{\partial z} = j\frac{e^{-\alpha z}}{L_{NL}}|U|^2 U
+            \end{equation}
+            %seite 98
+            The phase shift can be defined as 
+            \begin{equation}
+                \phi_{NL}(L,T) = |U(0,T)|^2 (L_{eff}/L_{NL})
+            \end{equation}
+            with 
+            \begin{equation}
+                L_{eff} = \frac{1-e^{-\alpha L}}{\alpha}
+                \qquad if \quad alpha = 0 \text{, then} \quad L_{eff} = L
+            \end{equation}
+            
+            That allow us to introduce the SPM-induced chirp as
+            
+            \begin{equation}
+                \delta \omega(T) = -\frac{\partial \phi_{NL}}{\partial T} = -\left( \frac{L_{eff}}{L_{NL}} \right) \frac{\partial }{T} |U(0,T)|^2
+                \label{deltaomega}
+            \end{equation}
+        
+        
+         For a super-Gaussian pulse 
+            \begin{equation}
+                \delta \omega(T) = \frac{2m L_{eff}}{T_0 L_{NL}}\left( \frac{T}{T_0}\right)^{2m-1}  exp\left\{ -\left( \frac{T}{T_0}\right)^{2m}   \right\}
+            \end{equation}
+        
+        \subsection{Solution of the NLSE}
+            \subsubsection{Dudley}
+            \subsubsection{SSFM}
+
+
 \section{GVD and SPM effects}
     \subsection{GVD code for python}
     \subsection{SPM code for python}

@@ -2,7 +2,61 @@
 
 This chapter reviews the theoretical base to model ultrashort-pulse propagation in fibers. Spectral and time broadening are fundamental aspects of nonlinear fiber optics. Understanding their basis and how they affect the propagation of an electromagnetic wave is an essential factor to both develop the code and test its effectiveness. Providing an overview of the equations describing the light propagation in a dispersive, nonlinear medium gives the principles to see what is solved with the back-end code at further stages in this thesis project.
 
+\section{Eigenvalue problem}
 
+\subsection{Planar Waveguide}
+  
+Figure 2 shows a planar waveguide consisting of two materials with refractive indices $n_1$ for the core and $n_2$ for the cladding. This waveguide is infinite in the y-direction, has a thickness $d$ (which satisfies that $d >> \lambda$), and fulfills the total internal reflection condition at the boundary.  Its transverse propagation constant is 
+
+            \begin{equation}
+                h=\sqrt{k_o^2n_1^2-\beta^2},
+                \label{eq_h}
+            \end{equation}
+ where $\beta$ and $h$ are for the core region. For the cladding region, we have the longitudinal propagation constant $\kappa$
+
+             \begin{equation}
+                \kappa=\sqrt{\beta^2-k_o^2n_2^2}.
+                \label{gam}
+            \end{equation}
+ 
+ Here $k_0 = \omega_0/c$ is the wavenumber in vacuum.
+
+We can include U, W, and V
+
+            \begin{equation}
+                U^2+W^2 = V^2 = k_o^2a^2(n_1^2-n_2^2) \
+                \begin{cases}
+                    U = a \times h \\
+                    W = a \times \kappa
+                \end{cases} 
+                \label{Normv},
+            \end{equation}
+where V is the so-called waveguide parameter or normalized frequency. 
+The TE mode is then given by 
+         
+            
+            \begin{equation}
+            \textbf{TE mode} \ \ W=
+                \begin{cases}
+                    U \tan(U) & \text{even mode}\\
+                    -U cotan(U) & \text{odd mode}
+                \end{cases}
+                \label{Temode}
+            \end{equation}
+
+We can solve the eigenvalue problem graphically by plotting W as a function of U [Joly's lecture]. Figure 2 shows this approach where the circle has a radius of V.
+
+We created a code at the Max-Plank institute [5] to show the students how a change of parameters can affect the plot and, thus, the solutions of the eigenvalue problem. This web tool aims to help the students understanding this problem, and figure 2 shows the interface. 
+
+
+
+The code can also solve the problem for the optical fiber, and the students can change some more parameters like cladding and core material, see the Poynting vector or some of the cuts of the field. Figures 3 to 6 show this web. 
+
+
+Heroku is a web that supports programming languages like Java, Node.js, Python, among others [heroku]. The codes for the planar waveguide and the optical fiber were deployed using its free service and are available on the internet via this link.
+
+
+   
 
 
 \section{Pulse propagation in fibers}
@@ -19,29 +73,29 @@ Loss and dispersion originated by interactions of the electromagnetic field with
             & +\underbrace{i \gamma \left( 1 + \frac{i}{\omega_0} \frac{\partial}{\partial t} \right) \left( A(z,t) \int_{-\infty}^{\infty} R(t') \left|A(z, t-t') \right|^2 \ dt'  \right)}_{\mathbf{nonlinear \ effects}}
         \end{split}
         \end{equation}
-
+    %[A] = sqrt(W)
     where: 
     \begin{itemize}
-        \item t is the time variable [s]
-        \item z is the space variable [m]
-        \item $alpha$ is the attenuation coefficient [1/m]
-        \item $beta_n$ are propagation constant coefficients $[s^n/m]$
-        \item $\gamma$ is the nonlinear parameter [1/Wm]
+        \item \textbf{t} is the time variable [s]
+        \item \textbf{z} is the space variable [m]
+        \item $\mathbf{\alpha}$ is the attenuation coefficient [1/m]
+        \item $\mathbf{\beta_n}$ are propagation constant coefficients $[s^n/m]$
+        \item $\mathbf{\gamma}$ is the nonlinear parameter [1/Wm]
         
             \begin{equation}
                 \gamma = \frac{n_2 \omega_0}{c A_{eff}},
                 \label{eq_gamma}
             \end{equation}
-        with $n_2 \ [m^2/W]$ is the nonlinear refractive index, and $A_{eff}$  is the  effective core area.
+        with $\mathbf{n_2} \quad [m^2/W]$ which is the nonlinear refractive index, and $A_{eff} \quad [m^2]$ that  is the  effective core area.
         %or  n2 is the nonlinear-index coefficient. 
-        \item R(t) [1/s] is the response function that includes electronic and vibrational contributions and is approximated by 
+        \item \textbf{R(t)} [1/s] is the response function that includes electronic and vibrational contributions and is approximated by 
         
         \begin{equation}\label{eq_rt}
             R(t) = (1- f_R)\delta(t) + f_R h_R(t),
         \end{equation}
         where $f_R$ and $h_R(t)$ are the fractional contribution of the delayed Raman response and the Raman response function, respectively. Conforming to \cite{dudley_taylor_2010}, 
         \begin{equation}\label{eq_hr}
-            h_R = \frac{\tau^2_1+\tau^2_2}{\tau_1\tau^2_2} exp(-t/\tau_2)sin(t/\tau_1)\Theta(t),
+            h_R(t) = \frac{\tau^2_1+\tau^2_2}{\tau_1\tau^2_2} exp(-t/\tau_2)sin(t/\tau_1)\Theta(t),
         \end{equation}
         here $\delta(t)$ and $\Theta(t)$ are the Delta Dirac and the Heaviside step functions, respectively; $f_R = 0.18$,  $\tau_1 =12.2 fs$, and $\tau_2 = 32 fs$.
          
@@ -80,94 +134,30 @@ Loss and dispersion originated by interactions of the electromagnetic field with
             \ \\
        It is noteworthy that the contribution of the third-dispersion term should be considered if $\beta_2 \approx 0$ (zero-dispersion region). Equation \eqref{eq_nlse} is known as the nonlinear Schrödinger equation (NLSE).
 
+           Following the convention used in \cite{AgrawalBook}, \cite{dudley_taylor_2010} , the continuous inverse Fourier transform of the slowly varying function of z is
+        
+        \begin{equation}\label{eq_acft}
+            A(z,t) = \frac{1}{2*\pi} \int_{-\infty}^{\infty} \tilde{A}(z,\omega-\omega_0)\exp{[-i(\omega-\omega_0)t]} \ d\omega.
+        \end{equation}
+        
+        
+        The FFT is an algorithm capable of calculating the discrete Fourier transform faster \citep{Lynch2018}. The definition of \href{https://numpy.org/doc/stable/index.html}{Numpy} of the inverse DFT \cite{dft}: 
+        \begin{equation}\label{eq_dft}
+            a_n = \frac{1}{n}\sum_{k=0}^{n-1} A_k \ exp\left\{ 2\pi i \frac{mk}{n} \right\} \qquad m = 0,...,n-1,
+        \end{equation}
 
-    \subsection{FFT}
+        then it follows
+        \begin{equation} \label{eq_deffft}
+                A(z,T) = FFT \left[ \tilde{A}(z,\omega) \right].
+            \end{equation}
+            
+            
     
-    \section{Modeling the short  pulse propagation}
-    In order to have an easier understanding of the physical processes that are involved in the propagation of short pulses in a medium, it will be first necessary to focus on the dispersion that affects this medium. The purpose of this section is to consider the fiber as a linear optical medium while studying the pulse-propagation problem, thus, it is possible to inspect the effect of GVD under certain circumstances where it dominates over the nonlinearities \citep{ AgrawalBook}. A further objective of this thesis is to implement a code capable of illustrate the Dispersion-induced broadening of optical pulses for both Gaussian and Hyperbolic-Secant (Sech) shapes.
-
-        
-  
-            \begin{equation}\label{eq_A0}
-                A(z,\tau ) = \sqrt{P_0}e^{\frac{-\alpha z}{2}} U(z,\tau)
-            \end{equation}
-            with
-            \begin{equation}
-                \tau =  \frac{T}{T_0} = \frac{t-z/v_g}{T_0} \qquad
-            \end{equation}
-        
-        It is important to define relative lengths in order to understand the effect of the dispersion and/or nonlinearities on a pulse propagation.
-            \ \\
-            \ \\
-            \begin{equation}
-                L_D = \frac{T^2_0}{|\beta_2|} \qquad and \qquad L_{NL} = \frac{1}{\gamma P_0}
-            \end{equation}
- 
-        
-        \subsection{Modeling the effect of GVD}
-        
-        Supposing a fiber length L such as $L \sim L_D$ and $L << L_{NL}$ and setting $\gamma = 0$: 
-            \begin{equation}
-                \frac{\partial U}{\partial z} = -j\frac{\beta_2}{2}\frac{\partial^2U}{\partial T^2}
-            \end{equation}
-            \ \\
-            \ \\
-            \begin{equation}
-                U(z,T) = FFT \left[ \widetilde{U}(0,\omega) \ exp\{j\frac{\beta_2}{2}\omega^2z\} \right]
-            \end{equation}
-            \ \\
-            \begin{equation}
-                \widetilde{U}(0,\omega)  = FFT^{-1} \left[ U(0,T)\right]
-            \end{equation}
+   
+        \subsection{Dispersion}
         
         
-        \begin{equation}
-                U(0,T) = 
-                \begin{cases}
-                    exp \left\{ -\frac{T}{2T^2_0} \right\} \qquad \text{for Gaussian-shaped pulses}  \\
-                    sech\left( \frac{T}{T_0}\right) exp \left\{ -\frac{iCT^2}{2T^2_0} \right\} \qquad \text{for Hyperbolic-Secant pulses}  \\
-                \end{cases}
-            \end{equation}
-            \begin{center}
-                with $C =$  initial Chirp.
-            \end{center}
-            Having these equations and using \href{https://numpy.org/}{Numpy}, was written a code to plot the pulse evolution. This code allows the user to change values like $\beta_2$ to see how the dispersion causes a pulse broadening.
         
-        
-        \subsection{Modeling the effect of SPM}
-        
-        Now supposing a fiber length L such as $L \sim L_{NL}$ and $L << L_D$ and setting $\beta_2 = 0$, equation \eqref{nlse} becomes: 
-            \begin{equation}
-                \frac{\partial U}{\partial z} = j\frac{e^{-\alpha z}}{L_{NL}}|U|^2 U
-            \end{equation}
-            %seite 98
-            The phase shift can be defined as 
-            \begin{equation}
-                \phi_{NL}(L,T) = |U(0,T)|^2 (L_{eff}/L_{NL})
-            \end{equation}
-            with 
-            \begin{equation}
-                L_{eff} = \frac{1-e^{-\alpha L}}{\alpha}
-                \qquad if \quad alpha = 0 \text{, then} \quad L_{eff} = L
-            \end{equation}
-            
-            That allow us to introduce the SPM-induced chirp as
-            
-            \begin{equation}
-                \delta \omega(T) = -\frac{\partial \phi_{NL}}{\partial T} = -\left( \frac{L_{eff}}{L_{NL}} \right) \frac{\partial }{T} |U(0,T)|^2
-                \label{deltaomega}
-            \end{equation}
-        
-        
-         For a super-Gaussian pulse 
-            \begin{equation}
-                \delta \omega(T) = \frac{2m L_{eff}}{T_0 L_{NL}}\left( \frac{T}{T_0}\right)^{2m-1}  exp\left\{ -\left( \frac{T}{T_0}\right)^{2m}   \right\}
-            \end{equation}
-        
-        \subsection{Solution of the NLSE}
-            \subsubsection{Dudley}
-            \subsubsection{SSFM}
-            
         \subsection{Other nonlinear effects}
 
 
