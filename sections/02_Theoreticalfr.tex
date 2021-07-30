@@ -5,17 +5,61 @@ This chapter reviews the theoretical base to model ultrashort-pulse propagation 
 \section{Eigenvalue problem}
 
 \subsection{Planar Waveguide}
+
+
+
+\begin{figure}[label={fig_planarwave}, caption={Sketch of a planar waveguide.}]
+  %  \caption*{Source: Some Source}
+        \centering  
+        \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt   
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,310); %set diagram left start at 0, and has height of 310
+
+%Shape: Rectangle [id:dp439999456910388] 
+\draw  [draw opacity=0][fill={rgb, 255:red, 218; green, 221; blue, 255 }  ,fill opacity=1 ] (100,80) -- (280.5,80) -- (280.5,160) -- (100,160) -- cycle ;
+%Shape: Boxed Line [id:dp5082075899729874] 
+\draw    (80,120) -- (318,120) ;
+\draw [shift={(320,120)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Boxed Line [id:dp5101173446407539] 
+\draw    (100,220) -- (100,22) ;
+\draw [shift={(100,20)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Boxed Line [id:dp2709424820833741] 
+\draw    (100.5,160) -- (280.5,160) ;
+%Shape: Boxed Line [id:dp10541842748284669] 
+\draw    (100,80) -- (280,80) ;
+
+
+% Text Node
+\draw (74.67,64.73) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$+\frac{d}{2}$};
+% Text Node
+\draw (72,145.07) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$\ -\frac{d}{2}$};
+% Text Node
+\draw (164.67,97.73) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$n_{1}  >n_{2}$};
+% Text Node
+\draw (117,177.07) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$n_{2}$};
+% Text Node
+\draw (117,54.4) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$n_{2}$};
+% Text Node
+\draw (324,119.73) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$z$};
+% Text Node
+\draw (82,15.07) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$x$};
+
+
+\end{tikzpicture}
+
+\end{figure}
   
-Figure 2 shows a planar waveguide consisting of two materials with refractive indices $n_1$ for the core and $n_2$ for the cladding. This waveguide is infinite in the y-direction, has a thickness $d$ (which satisfies that $d >> \lambda$), and fulfills the total internal reflection condition at the boundary.  Its transverse propagation constant is 
+Figure \ref{fig_planarwave} shows a planar waveguide consisting of two materials with refractive indices $n_1$ for the core and $n_2$ for the cladding. This waveguide is infinite in the y-direction, has a thickness $d$ (which satisfies that $d >> \lambda$), and fulfills the total internal reflection condition at the boundary.  Its transverse propagation constant is
+
 
             \begin{equation}
-                h=\sqrt{k_o^2n_1^2-\beta^2},
+                h=\sqrt{k_0^2n_1^2-\beta^2},
                 \label{eq_h}
             \end{equation}
  where $\beta$ and $h$ are for the core region. For the cladding region, we have the longitudinal propagation constant $\kappa$
 
              \begin{equation}
-                \kappa=\sqrt{\beta^2-k_o^2n_2^2}.
+                \kappa=\sqrt{\beta^2-k_0^2n_2^2}.
                 \label{gam}
             \end{equation}
  
@@ -24,7 +68,7 @@ Figure 2 shows a planar waveguide consisting of two materials with refractive in
 We can include U, W, and V
 
             \begin{equation}
-                U^2+W^2 = V^2 = k_o^2a^2(n_1^2-n_2^2) \
+                U^2+W^2 = V^2 = k_0^2a^2(n_1^2-n_2^2) \
                 \begin{cases}
                     U = a \times h \\
                     W = a \times \kappa
@@ -44,24 +88,43 @@ The TE mode is then given by
                 \label{Temode}
             \end{equation}
 
-We can solve the eigenvalue problem graphically by plotting W as a function of U [Joly's lecture]. Figure 2 shows this approach where the circle has a radius of V.
-
-We created a code at the Max-Plank institute [5] to show the students how a change of parameters can affect the plot and, thus, the solutions of the eigenvalue problem. This web tool aims to help the students understanding this problem, and figure 2 shows the interface. 
+We can solve the eigenvalue problem graphically by plotting W as a function of U [Joly's lecture]. Figure \ref{fig:eigen1} shows this approach where the circle has a radius of V.
 
 
+\begin{figure}[label={fig:eigen1}, caption={Visualization of the graphic solution of the eigenvalue problem. Taken from \cite{herokuapp}}]
+  %  \caption*{Source: Some Source}
+	\includegraphics[width=.6\textwidth]{figures/chap2/Eigenvalue.png} 
+\end{figure}
 
-The code can also solve the problem for the optical fiber, and the students can change some more parameters like cladding and core material, see the Poynting vector or some of the cuts of the field. Figures 3 to 6 show this web. 
+We created a code at the Max-Plank institute \cite{gitmax} to show the students how a change of parameters can affect the plot and, thus, the solutions of the eigenvalue problem. This web tool aims to help the students understanding this problem, and figure \ref{fig:planarp}  shows the interface. The code is written in Python and the Web interface made with Dash/Plotly.  
+
+\begin{figure}[label={fig:planarp}, caption={\href{https://fiber-mode-app.herokuapp.com/apps/dash_plot}{Heroku app} for the planar waveguide.}]
+  %  \caption*{Source: Some Source}
+	\includegraphics[width=.8\textwidth]{figures/chap2/planarpage.png} 
+\end{figure}
 
 
-Heroku is a web that supports programming languages like Java, Node.js, Python, among others [heroku]. The codes for the planar waveguide and the optical fiber were deployed using its free service and are available on the internet via this link.
+Heroku is a web that supports programming languages like Java, Node.js, Python, among others \cite{heorku}. The codes for the planar waveguide and the optical fiber were deployed using its free service.
+
+\subsection{Optical Fiber}
+
+The code can also solve the problem for the optical fiber, and the students can change some more parameters like cladding and core material, see the Poynting vector or some of the cuts of the field. Figures \ref{fig:fibre1} and \ref{fig:fibre2} show this web. 
+
+\begin{figure}[label={fig:fibre1}, caption={\href{https://fiber-mode-app.herokuapp.com/apps/results}{Heroku app} for the optical fiber (1).}]
+  %  \caption*{Source: Some Source}
+	\includegraphics[width=.8\textwidth]{figures/chap2/fibre1.PNG} 
+\end{figure}
+
+\begin{figure}[label={fig:fibre2}, caption={\href{https://fiber-mode-app.herokuapp.com/apps/results}{Heroku app} for the optical fiber (2).}]
+  %  \caption*{Source: Some Source}
+	\includegraphics[width=.8\textwidth]{figures/chap2/fibre2.PNG} 
+\end{figure}
 
 
    
 
 
 \section{Pulse propagation in fibers}
-
-Pulse propagation in fibers
 
 Loss and dispersion originated by interactions of the electromagnetic field with the atoms of the medium, and frequency dependence of the refractive index affect the propagation of an electromagnetic wave through this medium \citep{dudley_taylor_2010}. Shape and spectrum of short pulses with widths between approx. 10ns and 10fs propagating in a fiber are affected by nonlinear and dispersive effects \citep{AgrawalBook}.  
 
