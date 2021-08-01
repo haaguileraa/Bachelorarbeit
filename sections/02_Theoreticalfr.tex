@@ -65,6 +65,8 @@ Figure \ref{fig_planarwave} shows a planar waveguide consisting of two materials
  
  Here $k_0 = \omega_0/c$ is the wavenumber in vacuum.
 
+
+
 We can include U, W, and V
 
             \begin{equation}
@@ -109,6 +111,15 @@ Heroku is a web that supports programming languages like Java, Node.js, Python, 
 \subsection{Optical Fiber}
 
 The code can also solve the problem for the optical fiber, and the students can change some more parameters like cladding and core material, see the Poynting vector or some of the cuts of the field. Figures \ref{fig:fibre1} and \ref{fig:fibre2} show this web. 
+
+
+The refractive index of a material can be approximated by 
+\begin{equation}
+    n^2 (\omega) = 1 + \sum_{j=1}^{m} \frac{B_j\omega^2_j}{\omega^2_j - \omega^2} 
+    \label{eq_ene}
+\end{equation}
+called the Sellmeier equation. Here $\omega_j$ is the resonance frequency and $B_j$ the strength of it \citep{AgrawalBook}. This allowed to add the different materials to de code an can be changed by selecting the material in the dropwdowns for the core and the cladding of the fiber.
+
 
 \begin{figure}[label={fig:fibre1}, caption={\href{https://fiber-mode-app.herokuapp.com/apps/results}{Heroku app} for the optical fiber (1).}]
   %  \caption*{Source: Some Source}
@@ -200,28 +211,75 @@ Loss and dispersion originated by interactions of the electromagnetic field with
            Following the convention used in \cite{AgrawalBook}, \cite{dudley_taylor_2010} , the continuous inverse Fourier transform of the slowly varying function of z is
         
         \begin{equation}\label{eq_acft}
-            A(z,t) = \frac{1}{2*\pi} \int_{-\infty}^{\infty} \tilde{A}(z,\omega-\omega_0)\exp{[-i(\omega-\omega_0)t]} \ d\omega.
+            A(z,t) = \frac{1}{2*\pi} \int_{-\infty}^{\infty} \tilde{A}(z,\omega-\omega_0)\exp{[-i(\omega-\omega_0)t]} \ d\omega \ .
         \end{equation}
         
         
-        The FFT is an algorithm capable of calculating the discrete Fourier transform faster \citep{Lynch2018}. The definition of \href{https://numpy.org/doc/stable/index.html}{Numpy} of the inverse DFT \cite{dft}: 
+        The FFT is an algorithm capable of calculating the discrete Fourier transform faster \citep{Lynch2018}. The definition of \href{https://numpy.org/doc/stable/index.html}{Numpy} of the inverse DFT as \cite{dft} says is 
         \begin{equation}\label{eq_dft}
             a_n = \frac{1}{n}\sum_{k=0}^{n-1} A_k \ exp\left\{ 2\pi i \frac{mk}{n} \right\} \qquad m = 0,...,n-1,
         \end{equation}
 
-        then it follows
+        then, it follows
         \begin{equation} \label{eq_deffft}
                 A(z,T) = FFT \left[ \tilde{A}(z,\omega) \right].
             \end{equation}
             
             
+        \subsection{Dispersion}
+    The frequency dependency of the refractive index can lead to different speeds of propagation from different wavelengths of pulses in a fiber, which causes a broadening of the pulse in the time domain. This effect can limit the transmission of information and generate effects like inter symbol interference.  So, one can call chromatic dispersion the delay between several spectral components of a traveling pulse, i.e., there are different group velocities for the diverse components propagating in the fiber  \citep{Udayakumar2013ChromaticDC}. This delay depends on the waveguide (e.g., core radius) and material (e.g., the difference between core and cladding indices) contributions \citep{dudley_taylor_2010}. 
+    
+    The Taylor series expansion of the propagation constant 
+    \begin{equation}
+         \beta(\omega) = n (\omega)\frac{\omega}{c} = \beta_0 + \beta_1(\omega-\omega_0) \frac{1}{2}\beta_2(\omega-\omega_0)^2+...\, 
+         \label{eq_betas}
+    \end{equation}
+    with 
+    \begin{equation}
+        \beta_m = \frac{d^m\beta}{d\omega^2}_{\omega = \omega_0} \qquad (m = 0,1,2,...),
+        \label{eq_dbeta}
+    \end{equation}
+    
+    
+    defines the Group Velocity Dispersion (GVD) parameter $\beta_2$  and higher-order dispersion terms.  $\beta_2$ is also related to the dispersion parameter D by
+    \begin{equation}
+        D = \frac{d\beta_1}{d\lambda} = \frac{2\pi c}{\lambda^2}\beta_2 \quad [\frac{ps}{nm \ km}] \ .
+        \label{eq_Ds}
+    \end{equation}
+    
+    Depending on the value of the GVD parameter shows the fiber a normal dispersion ($\beta_2 > 0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$).
+    
+    Linear solitons can reduce this effect, even though there are several methods to compensate chromatic dispersion, as \cite{AgrawalBook}, \cite{dudley_taylor_2010},  and \citep{Udayakumar2013ChromaticDC} explain. Dispersion compensating fiber (DCF), Fiber Bragg Grating (FBG), and Optical Phase Conjugator (OPC) are some of the methods used.
     
    
-        \subsection{Dispersion}
-        
-        
-        
-        \subsection{Other nonlinear effects}
+
+\subsection{Nonlinear Effects}
+
+    Nonlinearities can be effects such as third-harmonic generation, four-wave mixing (FWM). The Kerr nonlinearity $n = n(P_{opt})$
+    can lead to a time-dependent phase delay of the pulse itself, known as self-phase modulation, to a co-propagating pulse, known as cross-phase modulation (XPM), or the formation of a fourth component through up to three light waves with different frequencies (FMW ) \cite{rein}. The refractive index is written as
+    
+    
+    \begin{equation}
+        \tilde{n} (\omega, \left| E \right|^2) = \overbrace{n(\omega)}^{linear \ part \ Eq. \ \eqref{eq_ene}} + \underbrace{ n_2 \left| E \right|^2}_{nonlinear part},
+    \end{equation} 
+   
+   where $n_2 = \frac{3}{8n}Re\left\{ \chi^{(3)}_{\chi \chi \chi}\right\}$ and $\chi^{(3)}$ is the third-order susceptibility.
+   
+   \subsubsection{Stimulated Inelastic Scattering}
+    A further aspect of the nonlinear effects is the stimulated inelastic scattering. These effects are the stimulated Raman and Brillouin scattering (SRS and SBS, respectively). Vibrations of the molecular bonds of the medium interact with the injected pulse, which can lead to an amplification of the "Stokes wave" through a scattering power transfer by the molecular vibrations \cite{rein}. A main difference is that SRS and SBS involve then optical and acoustic phonons, respectively \cite{AgrawalBook}.
+   
+        \section{Solution of the NLSE}
+    
+        It is common to solve the nonlinear differential equations \eqref{eq_b} and \eqref{eq_nlse} by a numerical method instead of analytical methods like \citep{Mihalache_1993}.  
 
 
+    \subsection{Step-Doubling Technique}
+         \citep{dudley_taylor_2010}uses an adaptative algorithm to propagate the solution of the NLSE, having two steps of calculation and a longer one equivalent starting at the same point. Therefore, they estimate the error through the differences between computations to converge more quickly. In \citep{gitdud}  is presented a Matlab-based code using this step-doubling technique. 
+         
+    \subsection{Split-Step Fourier Method}
+
+    In this thesis, the split-step Fourier method (SSFM) was the numerical method selected to solve the NLSE. \citep{AgrawalBook}, \citep{sinkin}, \citep{robust},  and \citep{HohageSchmidt2002} show different approaches and points of view of this method.  \citep{robust} gives a robust SSFM,  \citep{sinkin} explains how to select optimized step sizes depending on the accuracy or effect desired to inspect with the SSFM, and  \citep{HohageSchmidt2002} offers a comparison between the different kinds of SSFM (). 
+    
+    
+ 
 %Write eq for propagation and explain LD vs LNL Bereiche ->  GVD only -> U(0,T) Gauss- und Sech-Pulse -> wie wird das Programm durchgeführt? Ergebnisse mithilfe Matplotlibs, und Darstelung in einer Web-App 
