@@ -1,6 +1,71 @@
 \chapter{Theoretical Framework}
 
-This chapter reviews the theoretical base to model ultrashort-pulse propagation in fibers. Spectral and time broadening are fundamental aspects of nonlinear fiber optics. Understanding their basis and how they affect the propagation of an electromagnetic wave is an essential factor to both develop the code and test its effectiveness. Providing an overview of the equations describing the light propagation in a dispersive, nonlinear medium gives the principles to see what is solved with the back-end code at further stages in this thesis project.
+This chapter reviews the actual state and the basis of the e-learning, as well as the theoretical base to model ultrashort-pulse propagation in fibers. Spectral and time broadening are fundamental aspects of nonlinear fiber optics. Understanding their basis and how they affect the propagation of an electromagnetic wave is an essential factor to both develop the code and test its effectiveness. Providing an overview of the equations describing the light propagation in a dispersive, nonlinear medium gives the principles to see what is solved with the back-end code at further stages in this thesis project.
+
+
+
+
+\section{Background: Constructivism and other theories of education}
+This section aims to review some of the existing theories about interactive learning and how to enhance the experience of the students. Some projects presented help to the construction and planning of the final product desired: a web-oriented code modeling the propagation of ultrashort pulses in optical fiber.
+
+
+
+\subsection{Constructivism}
+Constructivism is a theory of cognition that proposes using unconventional instruction methods to fulfill the ever-active process of learning, this while not ignoring the idea that students are individuals who may perceive the learning environment in a different way than how the teachers intend to present it. Moreover, according to \cite{fosnot2013constructivism}, "the task of the educator is not to dispense knowledge but to provide students with opportunities and incentives to build it up;" that means adapting to the diverse forms of thinking, instead of assuming that the students will acquire this knowledge just from the means already given to them.
+
+
+\subsection{E-Learning}
+The increasing quantity of online, partially online, or presential courses with strong online interactions strives to supply the necessity from a generation of students (with a strong influence of technology and social networks) to incorporate E-Learning in the teaching methods and the learning environments.  According to \cite{vltool}: "interactivity is a key feature of online education which helps attract and retain students in online classes," thus applying visual learning tools together with an online learning experience can develop engagement and motivation in the learning process in students. 
+
+One can refer then to E-Learning as "the use of both software-based and online learning"  \cite{tabak} and, according to \cite{tabak}, \cite{munoz}, it has to be flexible, accessible, and intuitive. Hence factors like clear instructions, the relevance of the topics, the requirements to use its tools, and the difficulty to use them are crucial to implementing E-learning in different courses for different levels of education.
+
+\section{Background: Interactive Learning tools}
+
+Enhancing the students' learning experience regardless of the education level can be achieved using different interactive E-Learning tools, e.g., Web sites like Mathweb or mobile apps like I-MMAAPS. The interface of the interactive and personalizable content of these tools is essential to create a successful and effective tool \cite{vltool}. Therefore it should also be taken into account while creating an interactive E-Learning tool. Chapters 1 and 2 discuss how the interface was designed  and how a group of students perceived it.\textbf{ (give more details at the end of the project). }
+
+
+
+\subsection{examples of Interactive Learning tools}
+To know more about interactive learning is imperative to look at previous works and how they can contribute to the creation of new tools like the one discussed in this thesis.
+
+\subsubsection{Mathweb}
+The Hochschule Ruhr West has developed a website named \href{https://mathweb.de/}{"Mathweb"}   to support the students during the semester and preparation for the exams. According to surveys,  students underestimate the continuous study (during and after evaluations), among other problems related to learning strategies, that led to the endorsement of this Web amongst the students who, after the trial period, see it as a helpful tool and perceive a positive impact in their studies \cite{MathWeb}.
+
+On this website are available a wide variety of examples, interactive demonstrations with graphics, explanations, exercises, and the option to check if the solution given by the user is correct. The themes included going from simple mathematical operations to more complex topics like derivatives are available for everyone, even though the test course cannot be accessed signed in as a guest.
+
+\subsubsection{I-IMAPPS}
+
+I-IMAPPS is an application created at the Universiti Teknologi MARA Sarawak in Malaysia and aimed to promote the learning of the indigenous Iban language using situations immerse in possible environments where its use is necessary. The researchers worked based on constructivism and the premise that mobile learning is an alternative to study a language if the people do not have the time for intensive or immersive lessons. 
+
+
+To develop and structure this app, they followed the ADDIE Model, which consists of five aspects: 
+
+\begin{enumerate}
+    \item Analysis: gathering and selecting the information, phrases, and vocabulary of the Iban language; investigation on the availability (if there are existing apps created for this purpose, which is not the case) and focus on the learning objectives of the mobile app.
+    \item Design: description of the message to send and the user interaction with the content, layout, and storyboard design focused on the cultural aspects of this language. The content framework comprehends the resources (multimedia elements like text, audio animations, etc.), learning theories allowing the user to work autonomously, and interactivity.
+    
+    \item Development: the researchers used Flash for the animations, Photoshop CS5  for the illustrations, and Corona SDK for software engineering. 
+
+    
+    \item Implementation.
+    
+    \item Evaluation: 30 non-native speakers tested the I-MMAPPS prototypes, did a test of the new knowledge obtained, and gave feedback on the experience using them.
+    
+\end{enumerate}
+
+The conclusion of this research points that this app helps developing interest and assists non-native speakers at the early stages of learning this language. Further work needs to be done to improve the app's features \cite{CHACHIL2015267}. 
+
+
+
+\subsubsection{Control courses}
+Björn Wittenmark, Helena Haglund, and Mikael Johansson at Lund Institute of Technology used interactive learning and dynamic pictures to aid the students while learning abstract parts of the theory in control courses. The goal was not just to have students with a solid theoretical understanding of the topics but also to have high engineering capabilities; this relies on the good connection of the theory by improving the comprehension of the students and the practical aspect of the problems presented. One way to achieve this is with material available "anywhere and anytime" using the web and Matlab and Simulink for the computations. 
+
+They implemented dynamic pictures where the user can see the effect of, e.g., changing a parameter in continuous-time poles and zeroes plots without typing commands. Drags, dropdowns, text input slots, and buttons enhance the graphical interface of the CCSDEMO. This tool makes active learning possible covering topics like robustness, tuning of PID-controllers, observability, among other subjects of the 13 available modules. They highlight the idea that it is meaningful to design the interface carefully to allow an intuitive use avoiding the need to read a manual and contributing to the utilization without supervision.
+
+In conclusion, dynamic pictures improve the courses giving the students more tools than just pre-canned video or static data and illustrations, motivating the students who responded encouragingly \cite{IEEEcontrol}.
+
+
+
 
 \section{Eigenvalue problem}
 
@@ -49,7 +114,7 @@ This chapter reviews the theoretical base to model ultrashort-pulse propagation 
         
         \end{figure}
           
-        Figure \ref{fig_planarwave} shows a planar waveguide consisting of two materials with refractive indices $n_1$ for the core and $n_2$ for the cladding. This waveguide is infinite in the y-direction, has a thickness $d$ (which satisfies that $d >> \lambda$), and fulfills the total internal reflection condition at the boundary.  Its transverse propagation constant is
+        Figure \ref{fig_planarwave} shows a planar waveguide consisting of two materials with refractive indices $n_1$ for the core and $n_2$ for the cladding. This waveguide is infinite in the y-direction, has a thickness $d$ (which satisfies that $d >> \lambda$), and fulfills the total internal reflection condition at the boundary \citep{yariv_b}, \citep{OKAMOTO200613}.  Its transverse propagation constant is
         
         
                     \begin{equation}
@@ -202,7 +267,7 @@ Loss and dispersion originated by interactions of the electromagnetic field with
     \subsection{NLSE}
         According to \citep{AgrawalBook}, the equation  \eqref{eq_b} for the slowly varying envelope can be simplified for pulses of width $T_0 > 5 ps$ to
         \begin{equation}
-                \frac{\partial A}{\partial z} = \frac{\alpha}{2}A-j \frac{\beta_2}{2}\frac{\partial^2A}{\partial T^2}+j\gamma|A|^2 A,
+                \frac{\partial A}{\partial z} = -\frac{\alpha}{2}A-j \frac{\beta_2}{2}\frac{\partial^2A}{\partial T^2}+j\gamma|A|^2 A,
                 \label{eq_nlse}
             \end{equation}
             \ \\
@@ -211,7 +276,8 @@ Loss and dispersion originated by interactions of the electromagnetic field with
            Following the convention used in \cite{AgrawalBook}, \cite{dudley_taylor_2010} , the continuous inverse Fourier transform of the slowly varying function of z is
         
         \begin{equation}\label{eq_acft}
-            A(z,t) = \frac{1}{2*\pi} \int_{-\infty}^{\infty} \tilde{A}(z,\omega-\omega_0)\exp{[-i(\omega-\omega_0)t]} \ d\omega \ .
+            A(z,t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} %\tilde{A}(z,\omega-\omega_0)\exp{[-i(\omega-
+            \tilde{A}(z,\omega)exp(-i\omega t) \ d\omega \ .
         \end{equation}
         
         
@@ -243,11 +309,11 @@ Loss and dispersion originated by interactions of the electromagnetic field with
         
         defines the Group Velocity Dispersion (GVD) parameter $\beta_2$  and higher-order dispersion terms.  $\beta_2$ is also related to the dispersion parameter D by
         \begin{equation}
-            D = \frac{d\beta_1}{d\lambda} = \frac{2\pi c}{\lambda^2}\beta_2 \quad [\frac{ps}{nm \ km}] \ .
+            D = \frac{d\beta_1}{d\lambda} = - \frac{2\pi c}{\lambda^2}\beta_2 \quad [\frac{ps}{nm \ km}] \ .
             \label{eq_Ds}
         \end{equation}
         
-        Depending on the value of the GVD parameter shows the fiber a normal dispersion ($\beta_2 > 0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$).
+        Depending on the value of the GVD parameter, either shows the fiber a normal dispersion ($\beta_2 > 0$ , $D<0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$ , $D>0$).
         
         Linear solitons can reduce this effect, even though there are several methods to compensate chromatic dispersion, as \cite{AgrawalBook}, \cite{dudley_taylor_2010},  and \citep{Udayakumar2013ChromaticDC} explain. Dispersion compensating fiber (DCF), Fiber Bragg Grating (FBG), and Optical Phase Conjugator (OPC) are some of the methods used.
         
@@ -288,7 +354,7 @@ Loss and dispersion originated by interactions of the electromagnetic field with
          
     \subsection{Split-Step Fourier Method}
 
-        In this thesis, the split-step Fourier method (SSFM) was the numerical method selected to solve the NLSE. \citep{AgrawalBook}, \citep{sinkin}, \citep{robust},  and \citep{HohageSchmidt2002} show different approaches and points of view of this method.  \citep{robust} gives a robust SSFM,  \citep{sinkin} explains how to select optimized step sizes depending on the accuracy or effect desired to inspect with the SSFM, and  \citep{HohageSchmidt2002} offers a comparison between the different kinds of SSFM. 
+        In this thesis, the split-step Fourier method (SSFM) was the numerical method selected to solve the NLSE. \citep{AgrawalBook}, \citep{sinkin}, \citep{robust},  and \citep{HohageSchmidt2002} show different approaches and points of view of this method.  \citep{robust} gives a robust SSFM,  \citep{sinkin} explains how to select optimized step sizes depending on the accuracy or effect desired to inspect with the SSFM, and  \citep{HohageSchmidt2002} offers a comparison between the different kinds of SSFM. Furthermore, Suárez, P. \citep{suarez} gives a MATLAB implementation of the SSFM with a learning and teaching perspective. 
         
         Following \citep{AgrawalBook}, equations \eqref{eq_b} and \eqref{eq_nlse} can be represented by using
     
@@ -298,11 +364,11 @@ Loss and dispersion originated by interactions of the electromagnetic field with
         
         with $\hat{\mathcal{D}}$ known as the differential operator, and $\hat{\mathcal{N}}$ as the nonlinear operator: 
         
-        \begin{equation}
+        \begin{equation} \label{eq_dhat}
             \hat{\mathcal{D}} = -\frac{\alpha}{2} - \frac{i \beta_2}{2} \frac{\partial^2 }{\partial T^2} +\frac{\beta_3}{6} \frac{\partial^3 }{\partial T^3},
         \end{equation}
         and
-        \begin{equation}
+        \begin{equation} \label{eq_nhat}
              \hat{\mathcal{N}} = i \gamma   \left(\left|A\right|^2+ \frac{i}{\omega_0} \frac{\partial}{\partial T} (\left| A\right|^2)-  \ T_R \frac{\partial \left|A \right|^2}{\partial T} \right).
         \end{equation}
         
