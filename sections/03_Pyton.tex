@@ -38,7 +38,7 @@
         
         For the first case, both effects are negligible. In the second and third cases, the dispersion and nonlinearities act alone, respectively; and finally, both effects play an important role in the fourth case.
         
-        \subsection{Modeling the effect of GVD}
+        \subsection{Modeling the effect of GVD}\label{subsect:gvd}
    
     
         
@@ -95,6 +95,9 @@
         Having these equations and using \href{https://numpy.org/}{Numpy}, was written a code to plot the pulse evolution. This code allows the user to change values like $\beta_2$ to see the dispersion-induced broadening. 
         
         \begin{figure}[label={fig:gvdmtp}, caption={Effect of GVD in a Gaussian pulse following Eq. \eqref{eq_ugvdg}.}]
+        \centering
+        \begin{tabular}[c]{cc}
+        \centering
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\textwidth]{figures/chap3/gvdonlygaus.eps}
@@ -106,10 +109,14 @@
             \includegraphics[width=1\textwidth]{figures/chap3/gvdgausagr.png}
             \caption{Plot given in \citep{AgrawalBook} p. 68.}\label{fig:gvdmtp2}
         \end{subfigure}
+        \end{tabular}
         \end{figure}
         
         
         \begin{figure}[label={fig:gvdmtps}, caption={Effect of GVD in a Gaussian (Fig. \subref{fig:gvdmtp3}) and in a Sech (Fig. \subref{fig:gvdmtp4}) pulse following Eq. \eqref{eq_gvdufft}, using Matplotlib and function \emph{incident\_field()} of the code.}]
+        \centering
+        \begin{tabular}[c]{cc}
+        \centering
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\textwidth]{figures/chap3/gvdgaus.eps}
@@ -123,6 +130,7 @@
             \caption{Sech Pulse.}
             \label{fig:gvdmtp4}
         \end{subfigure}
+        \end{tabular}
         \end{figure}
         
         \subsection{Modeling the effect of SPM}
@@ -154,11 +162,7 @@
                 \delta \omega(T) = \frac{2m L_{eff}}{T_0 L_{NL}}\left( \frac{T}{T_0}\right)^{2m-1}  exp\left\{ -\left( \frac{T}{T_0}\right)^{2m}   \right\}
             \end{equation}
         
-        The code in Appendix 
-        \begin{huge}
-        missing
-        \end{huge}
-         uses the equations \eqref{eq_spmchirp} and \eqref{eq_spmchirpsg} for the Gaussian pulses. The integration can be carried using either the Euler's mid-point method \citep{euler} (function \emph{mid\_step(x0, f, T, *args)}), or the function cumtrapz\footnote{\href{https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.cumtrapz.html}{Scipy documentation for 'cumtrapz'}}. For Hyperbolic-Secant pulses the process starts using the equation \eqref{eq_phi}, and its derivative gives as result the SPM-induced chirp. Figures \ref{fig:spmsg} and \ref{fig:spmsech} show the effect of SPM with $L_{eff} = L_{NL}$ \citep{AgrawalBook} on Gaussian and Sech pulses, respectively. The plots were made with Matplotlib and function \emph{incident\_field\_spm()} of the code.
+        The code in Appendix \ref{sec:initvariables} uses the equations \eqref{eq_spmchirp} and \eqref{eq_spmchirpsg} for the Gaussian pulses. The integration can be carried using either the Euler's mid-point method \citep{euler} (function \emph{mid\_step(x0, f, T, *args)}), or the function cumtrapz\footnote{\href{https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.cumtrapz.html}{Scipy documentation for 'cumtrapz'}}. For Hyperbolic-Secant pulses the process starts using the equation \eqref{eq_phi}, and its derivative gives as result the SPM-induced chirp. Figures \ref{fig:spmsg} and \ref{fig:spmsech} show the effect of SPM with $L_{eff} = L_{NL}$ \citep{AgrawalBook} on Gaussian and Sech pulses, respectively. The plots were made with Matplotlib and function \emph{incident\_field\_spm()} of the code.
         
         
         
@@ -202,7 +206,7 @@
         \end{tabular}
         \end{figure}
         
-        \subsection{Solution of the NLSE (SSFM)}
+        \subsection{Solution of the NLSE (SSFM)}\label{subsec:nlse}
             To initially solve the NLSE through the SSFM, the equations to follow are \eqref{eq_dpn}, \eqref{eq_dhat}, and \eqref{eq_nhat}. As the objective of this project is to create an interactive web tool with learning purposes, we avoided some calculations related to Raman Scattering and other nonlinear effects. Thus, equation \eqref{eq_nhat} turns out to be 
             \begin{equation} \label{eq_nhat2}
              \hat{\mathcal{N}} = i \left( 
@@ -296,7 +300,7 @@
         \end{tabular}
         \end{figure}
 
-    Following \citep{stolen}, the frequency spectra of a Gaussian pulse dependent on some values of maximum phase-shift is expected to be as given in figure \subref{fig:spmstol}. Figures \subref{fig:spm0pi}-\subref{fig:spm35pi} present the result of the function \emph{split\_step()} in absence of dispersive effects (or close to the zero-dispersion region). The results of the code are very close to such shapes expected. The calculations were carried for a pulse $T_0 = 1ps$ in a lossless fiber with a length $L = 500m$, and $h = 0.004*L$ (250 steps).
+    Following \citep{stolen}, the frequency spectra of a Gaussian pulse dependent on some values of maximum phase-shift is expected to be as given in figure \subref{fig:spmstol}. Figures \subref{fig:spm0pi}-\subref{fig:spm35pi} present the result of the function \emph{split\_step()} in the absence of dispersive effects (or close to the zero-dispersion region). The results of the code are very close to such shapes expected to get. The calculations were carried for a pulse $T_0 = 1ps$ in a lossless fiber with a length $L = 500m$, and $h = 0.004*L$ (250 steps).
     
      \begin{figure}[label={fig:spmssfm}, caption={Shape of the spectra for Gaussian pulses by maximum phase shift ($\phi_{NL}$).}]
          \centering	
@@ -312,7 +316,7 @@
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/0pi.eps}
-            \caption{$\phi_{NL}= 0$.}
+            \caption{$\phi_{NLmax}= 0$.}
             \label{fig:spm0pi}
         \end{subfigure}
         \end{tabular}
@@ -320,14 +324,14 @@
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/0_5pi.eps}
-            \caption{$\phi_{NL}= 0.5\pi$.}
+            \caption{$\phi_{NLmax}= 0.5\pi$.}
             \label{fig:spm05pi}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/1_5pi.eps}
-            \caption{$\phi_{NL}= 1.5\pi$.}
+            \caption{$\phi_{NLmax}= 1.5\pi$.}
             \label{fig:spm15pi}
         \end{subfigure}
         \end{tabular}
@@ -336,14 +340,14 @@
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/2_5pi.eps}
-            \caption{$\phi_{NL}= 2.5\pi$.}
+            \caption{$\phi_{NLmax}= 2.5\pi$.}
             \label{fig:spm25pi}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/3_5pi.eps}
-            \caption{$\phi_{NL}= 3.5\pi$.}
+            \caption{$\phi_{NLmax}= 3.5\pi$.}
             \label{fig:spm35pi}
         \end{subfigure}
         \end{tabular}
@@ -361,27 +365,31 @@
           %  \caption*{Source: Some Source}
         	\includegraphics[trim = 0cm 0.5cm 0 1.2cm, clip, width=0.75\textwidth]{figures/chap3/Apps.eps} 
         \end{figure}
-    \begin{figure}[label={fig:UML}, caption={Class Diagram of init\_variables.py}]
-          %  \caption*{Source: Some Source}
-        	\includegraphics[width=.6\textwidth]{figures/chap3/init_variables.eps} 
+    
+     The file init\_variables.py (Appendix \ref{sec:initvariables}) contains the necessary classes and functions to run all calculations needed for either the page or a local use with Matplotlib or directly Dash as localhost. Figure \ref{fig:UML} presents the class diagram of this file. 
+
+    As inputs for the class Pulse, we have the pulse width T0, the time window T, the pulse type (either 'Gaussian' or 'Sech'), the initial chirp \textbf{C}, and, if necessary, the value of \textbf{m} for Super-Gaussian pulses. This class is in charge of initializing the pulse at z = 0. Then, the class Propagation receives the required inputs to solve the problem needed, i.e., it can return the solution for just GVD effects, just SPM effects (in this case, the phase shift and the frequency chirp), or the SSFM. One can also calculate the values of $L_D$, $L_{NL}$, $L_{eff}$, and $\phi_{NLmax}$. It is possible further to create Plotly's graphical objects essential to plot with Dash. This way, one can avoid writing more code lines while building the dash apps. 
+    
+    \begin{figure}[label={fig:UML}, caption={Class Diagram of init\_variables.py}]	\includegraphics[width=.6\textwidth]{figures/chap3/init_variables.eps} 
         \end{figure}
     
-    
-    
     \subsection{GVD code for python}
-    Structure of the code, functions explained. maybe a map of the code
+    The code responsible for providing the app for only dispersive effects to the user is the file \emph{gvd.py} (Appendix B). This code uses either 'only\_gvd' or 'gauss\_gvd' as solution type. The class is then in charge of using the methods previously mentioned in section \ref{subsect:gvd}. Sliders allow to change the values of $\beta_2$, initial chirp, m, and z, while a switch changes between Gaussian and Sech. In addition, the callbacks are always returning the actual state of the values along with the new calculated plots.  A simple block diagram of this page is presented in figure \ref{fig:gvddash}.
+        
     \begin{figure}[label={fig:gvddash}, caption={Simplified Block-Diagram of gvd.py}]
           %  \caption*{Source: Some Source}
         	\includegraphics[trim = 2.5cm 12.5cm 5cm 2.5cm, clip, clip,width=1\textwidth]{figures/chap3/GVD.eps} 
         \end{figure}
     \subsection{SPM code for python}
+    Figure \ref{fig:spmdash} bestows a simplified view of the SPM-page's structure.  The front-end receives values of $\gamma$, $P_0$, and m. Then, it shows the plots of phase shift and frequency chirp together with the actual value of $L_{NL}$. 
         \begin{figure}[label={fig:spmdash}, caption={Simplified Block-Diagram of spm.py}]
           %  \caption*{Source: Some Source}
         	\includegraphics[trim = 0.5cm 12.5cm 6.5cm 1.2cm, clip, clip,width=1\textwidth]{figures/chap3/SPM.eps} 
         \end{figure}
-        \subsection{mid-point}
+        
     \subsection{NLSE}
-        \subsubsection{SSFM}
+        As discussed in section \ref{subsec:nlse}, the SSFM plays a meaningful role in this app.  This page is more intricate than the previous two mentioned due to the complexity of its callbacks and the number of input variables. Again, its block diagram is in figure \ref{fig:ssfmdash}. 
+        
         \begin{figure}[label={fig:ssfmdash}, caption={Simplified Block-Diagram of nlse.py}]
           %  \caption*{Source: Some Source}
         	\includegraphics[trim = 0.5cm 12.5cm 6.5cm 0.6cm, clip, clip,width=1\textwidth]{figures/chap3/SSFM.eps} 

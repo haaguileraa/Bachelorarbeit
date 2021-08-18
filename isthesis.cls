@@ -14,6 +14,8 @@
 % Earlier versions of this package had a bug concerning the handling of \DeclareDefaultOption{…}
 
 % Conditional commands
+\RequirePackage{minted}
+%\usepackage{}
 \RequirePackage{ifthen}
 
 % Namespacing
