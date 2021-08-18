@@ -163,6 +163,9 @@
         
         
         \begin{figure}[label={fig:spmsg}, caption={Effect of SPM in a Gaussian pulse. Following equations \eqref{eq_phi} - \eqref{eq_spmchirpsg}. }]
+        \centering
+        \begin{tabular}[c]{cc}
+        \centering
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\textwidth]{figures/chap3/shift.eps}
@@ -176,9 +179,13 @@
             \caption{Frequency chirp $\delta \omega$.}
             \label{fig:chirp_s}
         \end{subfigure}
+        \end{tabular}
         \end{figure}
         
          \begin{figure}[label={fig:spmsech}, caption={Effect of SPM in a Sech pulse.}]
+         \centering
+        \begin{tabular}[c]{cc}
+        \centering
         \begin{subfigure}[b]{.53\textwidth}
 		    \centering	
             \includegraphics[width=1\textwidth]{figures/chap3/shift_sech.eps}
@@ -192,6 +199,7 @@
             \caption{Frequency chirp $\delta \omega$.}
             \label{fig:chirp}
         \end{subfigure}
+        \end{tabular}
         \end{figure}
         
         \subsection{Solution of the NLSE (SSFM)}
@@ -215,22 +223,166 @@
         \end{equation}
         
         
-        Depending on the value of \emph{N}, the SPM or GVD effects are more significant through the fiber. Some examples are carried by Agrawal \citep{AgrawalBook} for N = 0 (No SPM) and N = 1, then we compared them against the results we obtained with our code.    
+        Depending on the value of \emph{N}, the SPM or GVD effects are more significant through the fiber. Some examples are carried by Agrawal \citep{AgrawalBook} for N = 0 (No SPM) and N = 1, then we compared them against the results we obtained with our code (figures \ref{fig:n1pb} and \ref{fig:n1nb}). 
+        
+         \begin{figure}[label={fig:n1pb}, caption={Solution of the NLSE using SSFM for N=1 and $\beta_2 > 0$.}]
+         \centering	
+         \begin{tabular}[c]{cc}
+         \centering	
+        \begin{subfigure}[b]{.53\textwidth}
+        \centering	
+            \includegraphics[width=1\textwidth]{figures/chap3/SSFM/eN1bt.eps}
+            \caption{Envelope (time).}
+            \label{fig:eN1bt}
+        \end{subfigure}
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\textwidth]{figures/chap3/SSFM/eN1bs.eps}
+            \caption{Envelope (spectrum).}
+            \label{fig:eN1bs}
+        \end{subfigure}
+        \end{tabular}
+        \begin{tabular}[c]{cc}
+        \centering	
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\textwidth]{figures/chap3/SSFM/N1bt.eps}
+            \caption{Propagation (time).}
+            \label{fig:N1bt}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\textwidth]{figures/chap3/SSFM/N1bs.eps}
+            \caption{Propagation (spectrum).}
+            \label{fig:N1bs}
+        \end{subfigure}
+        \end{tabular}
+        \end{figure}
+        
+         \begin{figure}[label={fig:n1nb}, caption={Solution of the NLSE using SSFM for N=1 and $\beta_2 < 0$.}]
+         \centering	
+         \begin{tabular}[c]{cc}
+         \centering	
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/SSFM/eN1nbt.eps}
+            \caption{Envelope (time).}
+            \label{fig:eN1nbt}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/SSFM/eN1nbs.eps}
+            \caption{Envelope (spectrum).}
+            \label{fig:eN1nbs}
+        \end{subfigure}
+        \end{tabular}
+        \begin{tabular}[c]{cc}
+        \centering	
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/SSFM/N1nbt.eps}
+            \caption{Propagation (time).}
+            \label{fig:N1nbt}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/SSFM/N1nbs.eps}
+            \caption{Propagation (spectrum).}
+            \label{fig:N1nbs}
+        \end{subfigure}
+        \end{tabular}
+        \end{figure}
 
+    Following \citep{stolen}, the frequency spectra of a Gaussian pulse dependent on some values of maximum phase-shift is expected to be as given in figure \subref{fig:spmstol}. Figures \subref{fig:spm0pi}-\subref{fig:spm35pi} present the result of the function \emph{split\_step()} in absence of dispersive effects (or close to the zero-dispersion region). The results of the code are very close to such shapes expected. The calculations were carried for a pulse $T_0 = 1ps$ in a lossless fiber with a length $L = 500m$, and $h = 0.004*L$ (250 steps).
+    
+     \begin{figure}[label={fig:spmssfm}, caption={Shape of the spectra for Gaussian pulses by maximum phase shift ($\phi_{NL}$).}]
+         \centering	
+         \begin{tabular}[c]{cc}
+         \centering	
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/stolen_SPM.png}
+            \caption{Calculated freq. spectra. Taken from \citep{stolen}}
+            \label{fig:spmstol}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/0pi.eps}
+            \caption{$\phi_{NL}= 0$.}
+            \label{fig:spm0pi}
+        \end{subfigure}
+        \end{tabular}
+        \begin{tabular}[c]{cc}
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/0_5pi.eps}
+            \caption{$\phi_{NL}= 0.5\pi$.}
+            \label{fig:spm05pi}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/1_5pi.eps}
+            \caption{$\phi_{NL}= 1.5\pi$.}
+            \label{fig:spm15pi}
+        \end{subfigure}
+        \end{tabular}
+        \begin{tabular}[c]{cc}
+        \centering	
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/2_5pi.eps}
+            \caption{$\phi_{NL}= 2.5\pi$.}
+            \label{fig:spm25pi}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{.53\textwidth}
+		    \centering	
+            \includegraphics[width=1\linewidth]{figures/chap3/ssfm_spm/3_5pi.eps}
+            \caption{$\phi_{NL}= 3.5\pi$.}
+            \label{fig:spm35pi}
+        \end{subfigure}
+        \end{tabular}
+        \end{figure}
+    
+    
+    
 \section{Web-Tool}
     Following the experience with the Fiber-mode App (previous chapter), Dash/Plotly works as a framework to build the web interface for the code written in Python. Other options such as Bokeh\footnote{\url{https://bokeh.org/}}  were considered, even though Dash did not present problems with some of the types of data used. In addition, it allows us to present intuitive and cleaner plots. 
     
     This open-source Python library has the advantage of providing a reactive app, which will allow the students (or general users) to use it on browsers regardless of the device and operative system, i.e., smartphones (Android, IOS, etc.), tablets, computers, etc. Thus, we implement the theories of interactive learning and strive to provide an online tool (additional to the lectures, books, and illustrations) to aid the students and, expectedly, motivate them to understand the effects involved in the propagation of short pulses on fibers. 
-    The purpose of deploying this additional content online is to reach the necessities of most of the target population. Last year several universities around the globe had to do online teaching, and many activities of students' life migrated to the online aspect \citep{Hassel2020}. The average students possess (now more than ever) access to the internet, and, additionally, most of them have experience using online apps. Now, one can say that the app is accessible and flexible due to the previously mentioned characteristics. However, the intuitive part comes while developing the user interface. The application should help the user learn from it without vast information or 'how-to' tutorials. Consequently, it is crucial to place elements like buttons, sliders, or plots correctly. Figures X to Z show the global structure of the web app and which inputs will be available for the users to change. 
+    The purpose of deploying this additional content online is to reach the necessities of most of the target population. Last year several universities around the globe had to do online teaching, and many activities of students' life migrated to the online aspect \citep{Hassel2020}. The average students possess (now more than ever) access to the internet, and, additionally, most of them have experience using online apps. Now, one can say that the app is accessible and flexible due to the previously mentioned characteristics. However, the intuitive part comes while developing the user interface. The application should help the user learn from it without vast information or 'how-to' tutorials. Consequently, it is crucial to place elements like buttons, sliders, or plots correctly. Figure \ref{fig:appdash} shows the global structure of the code. 
     
-
-        
-
-\section{GVD and SPM effects}
+    \begin{figure}[label={fig:appdash}, caption={Global structure of the code.}]
+          %  \caption*{Source: Some Source}
+        	\includegraphics[trim = 0cm 0.5cm 0 1.2cm, clip, width=0.75\textwidth]{figures/chap3/Apps.eps} 
+        \end{figure}
+    \begin{figure}[label={fig:UML}, caption={Class Diagram of init\_variables.py}]
+          %  \caption*{Source: Some Source}
+        	\includegraphics[width=.6\textwidth]{figures/chap3/init_variables.eps} 
+        \end{figure}
+    
+    
     
     \subsection{GVD code for python}
     Structure of the code, functions explained. maybe a map of the code
+    \begin{figure}[label={fig:gvddash}, caption={Simplified Block-Diagram of gvd.py}]
+          %  \caption*{Source: Some Source}
+        	\includegraphics[trim = 2.5cm 12.5cm 5cm 2.5cm, clip, clip,width=1\textwidth]{figures/chap3/GVD.eps} 
+        \end{figure}
     \subsection{SPM code for python}
+        \begin{figure}[label={fig:spmdash}, caption={Simplified Block-Diagram of spm.py}]
+          %  \caption*{Source: Some Source}
+        	\includegraphics[trim = 0.5cm 12.5cm 6.5cm 1.2cm, clip, clip,width=1\textwidth]{figures/chap3/SPM.eps} 
+        \end{figure}
         \subsection{mid-point}
     \subsection{NLSE}
         \subsubsection{SSFM}
+        \begin{figure}[label={fig:ssfmdash}, caption={Simplified Block-Diagram of nlse.py}]
+          %  \caption*{Source: Some Source}
+        	\includegraphics[trim = 0.5cm 12.5cm 6.5cm 0.6cm, clip, clip,width=1\textwidth]{figures/chap3/SSFM.eps} 
+        \end{figure}
