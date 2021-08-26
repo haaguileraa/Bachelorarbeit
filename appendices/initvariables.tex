@@ -1,7 +1,7 @@
 \section{init\_variables.py}
 \label{sec:initvariables}
 
-
+%\begin{footnotesize}
 \begin{minted}{python}
 # coding:utf8
 import numpy as np
@@ -17,7 +17,8 @@ from datetime import date
 
 from scipy.optimize import minpack
 today = date.today()
-date = today.strftime("%d.%m.%Y")###Edit before deployment with, e.g., '28.06.2021'
+date = today.strftime("%d.%m.%Y")
+###Edit before deployment with, e.g., '28.06.2021'
 #-----------------//
 
 ##-----------NUMERICAL METHODS-----------##
@@ -30,7 +31,8 @@ def derivative(f,x0,method='central',dx=0.01):
     elif method == 'backward':
         return (f(x0) - f(x0 - dx))/dx
     else:
-        raise ValueError("Method must be 'central', 'forward' or 'backward'.") #taken and edited from https://www.math.ubc.ca/~pwalls/math-python/differentiation/differentiation/
+        raise ValueError("Method must be 'central', 'forward' or 'backward'.") 
+#taken and edited from https://www.math.ubc.ca/~pwalls/math-python/differentiation/differentiation/
 #--------------------------#
 #----Mid-point Method------#
 def mid_step(x0, f, T, *args):
@@ -96,15 +98,18 @@ class Pulse:
         self.points = len(self.T)
         #Normalized Slow-Varying Envelope
         if self.pulsetype == 'Gaussian':
-            self.UT0 = (np.exp(-((1+1j*self.C)/2)*((self.T/self.T0)**(2*self.m)))).astype(complex) #dtype = 'complex' in order to have complex values on solve_ivp 
+            self.UT0 = (np.exp(-((1+1j*self.C)/2)*((self.T/self.T0)**(2*self.m)))).astype(complex) 
+            #dtype = 'complex' in order to have complex values on solve_ivp 
             # self.T_FWHM = 2*np.sqrt(np.log(2))*self.T0
             # self.T0 = self.T_FWHM
         elif self.pulsetype == 'Sech':
-            self.UT0 = (1/(np.cosh(self.T/self.T0))*np.exp(-(1j*self.C*self.T**2)/(2*self.T0**2))).astype(complex)
+            self.UT0 = (1/(np.cosh(self.T/self.T0))*
+            np.exp(-(1j*self.C*self.T**2)/(2*self.T0**2))).astype(complex)
             # self.T_FWHM = 2*np.log(1+np.sqrt(2))*self.T0
             # self.T0 = self.T_FWHM
         else:
-            raise ValueError("Pulse '{0}' not found, it must be 'Sech' or 'Gaussian'.".format(self.pulsetype))
+            raise ValueError("Pulse '{0}' not found, it must be 
+            'Sech' or 'Gaussian'.".format(self.pulsetype))
         self.UW0 =np.fft.fftshift(np.fft.ifft(self.UT0))
         self.W = 2*np.pi* np.fft.fftfreq(self.points, self.dT) #+ self.w0
         #2*pi*(-N/2:N/2-1)/(N*dT)
@@ -115,7 +120,8 @@ class Pulse:
 
 #------------------------CLASS-------------------------------#
 class Propagation(Pulse):
-    def __init__(self,T0, T, solve_type= 'incident_field', L=0.1, beta2=0, gamma=0, P0=0,  beta3=0, loss = 0, pulsetype = 'Gaussian', m = 1, C=0, z0=0,h_step = 0.004, size_array = 51, wavelength=1550E-9):
+    def __init__(self,T0, T, solve_type= 'incident_field', L=0.1, beta2=0, gamma=0, P0=0,  beta3=0, 
+    loss = 0, pulsetype = 'Gaussian', m = 1, C=0, z0=0,h_step = 0.004, size_array = 51, wavelength=1550E-9):
         Pulse.__init__(self, T0, T, m=m, C=C, pulsetype=pulsetype)
         self.wavelength = wavelength
         self.speed = 299792458
@@ -129,7 +135,8 @@ class Propagation(Pulse):
         self.z0 = z0 #At this point will be evaluated the pulse while using the 'only_gvd' mode
         self.h_step = h_step #step-size of the SSFM
         self.size_array = size_array #Size of the array where we are going to save the values of U(T) and U(w)
-        self.U = np.zeros((self.size_array,self.points), dtype=complex) # U(z,T) is divided by certain ammount of steps and it's time length is N for each one of the steps
+        self.U = np.zeros((self.size_array,self.points), dtype=complex) 
+        # U(z,T) is divided by certain ammount of steps and it's time length is N for each one of the steps
         self.UW = np.zeros((self.size_array,self.points), dtype=complex)
         self.solve_type = solve_type
 
@@ -141,12 +148,14 @@ class Propagation(Pulse):
             self.incident_field_spm()
         elif self.solve_type == 'split_step':
             if self.beta2  == 0 or self.gamma  == 0 or self.P0 == 0:
-                print('Either beta2, gamma or P0 are zero, this could lead to problems with the calculation of the current method selected!')
+                print('Either beta2, gamma or P0 are zero, this could lead to problems with 
+                the calculation of the current method selected!')
             if self.zmax  == 0:
                 raise ValueError('Fiber Length cannot be 0 for de desired solution')       
             self.split_step()
         else:
-            raise ValueError("Solution method '{0}' does not exist, it must be 'only_gvd', 'gauss_gvd','only_spm' or 'split_step'.".format(self.solve_type))
+            raise ValueError("Solution method '{0}' does not exist, it must be 'only_gvd', 'gauss_gvd',
+            'only_spm' or 'split_step'.".format(self.solve_type))
 
     #Lengths
     def compute_LD(self):#Dispersion Length:
@@ -181,7 +190,8 @@ class Propagation(Pulse):
         return self.UT, self.UI, self.UW, self.UIW
 
     def Gaussian_pulse_GVD(self): #Function using Eq. 3.2.7 and 3.2.9 Agrawal
-        self.UT = self.T0/(np.sqrt(self.T0**2 - 1j*self.beta2*self.z0))*np.exp(-self.T**2/(2*(self.T0**2 - 1j*self.beta2*self.z0)))
+        self.UT = self.T0/(np.sqrt(self.T0**2 - 1j*self.beta2*self.z0))*
+        np.exp(-self.T**2/(2*(self.T0**2 - 1j*self.beta2*self.z0)))
         self.UI = np.absolute(self.UT)**2
         self.UW = np.fft.fftshift(np.fft.ifft(self.UT))
         self.UIW = np.absolute(self.UW)**2
@@ -207,7 +217,8 @@ class Propagation(Pulse):
         LNL = self.compute_LNL()
         Leff = LNL # Normalized to get the plots from the book
         if self.pulsetype == 'Gaussian':
-            if self.m <= 1: #This conditionals were written when the UT0 was not already generalized for chirped-super-gaussian pulsetypes. Following also the book Arawal
+            if self.m <= 1: 
+            #This conditionals were written when the UT0 was not already generalized for chirped-super-gaussian pulsetypes. Following also the book Arawal
                 self.Phi_NL = (Leff/LNL)*np.absolute(self.UT0)**2
                 self.delta_w = delta_g(self.T, self.T0, Leff, LNL)
             else: 
@@ -218,7 +229,8 @@ class Propagation(Pulse):
                 self.Phi_NL = -mid_step(0, delta_g, self.T, self.T0, Leff, LNL, self.m)
 
         elif self.pulsetype == 'Sech':
-            phinl = lambda t: (Leff/LNL)*np.absolute(1/(np.cosh(t/self.T0))*np.exp(-(1j*self.C*t**2)/(2*self.T0**2)))**2
+            phinl = lambda t: (Leff/LNL)*np.absolute(1/(np.cosh(t/self.T0))*
+            np.exp(-(1j*self.C*t**2)/(2*self.T0**2)))**2
             self.Phi_NL = phinl(self.T)
             self.delta_w = -derivative(phinl, self.T, dx=self.dT)
         else:
@@ -242,14 +254,16 @@ class Propagation(Pulse):
         self.U[0] = self.UT0  #first value for U(0,T)  
         self.UW[0] = self.UW0 #first value for U(0,W)  
         #for general def (Eq. (2.4.3)): 
-        Dw = -(1j*self.beta2/2)*(1j*self.W)**2 + (self.beta3/6)*(1j*self.W)**3 - self.alpha/2 #D = -1j*beta2/2*(δ²/T²) + beta3/6*(δ³/T³) - alpha/2
+        Dw = -(1j*self.beta2/2)*(1j*self.W)**2 + (self.beta3/6)*(1j*self.W)**3 - self.alpha/2 
+        #D = -1j*beta2/2*(δ²/T²) + beta3/6*(δ³/T³) - alpha/2
         #TODO: create a way to extract the betas from an array and take them to the frequency domain
         self.z = np.zeros((self.size_array))#array for saving the nth-point U(T,zn) and U(w,zn)
         mi = int(1/(self.size_array*self.h_step)) #just a counter 
         j = 1
         Utemp = self.UT0[:] #variable to update
 
-        #for i in np.linspace(1,zmax*1000-h,k):  if we pre-defined the resolution (or ammount of steps k) independent of the step size h
+        #for i in np.linspace(1,zmax*1000-h,k):  if we pre-defined the resolution 
+        #(or ammount of steps k) independent of the step size h
         for k in range(0,int(1/self.h_step),1): # from z to z+h k times until z_max is reached
             ztemp = k*h #  [m] actual z to evaluate
             Uwtemp = np.fft.fftshift(np.fft.ifft(Utemp))
@@ -260,7 +274,8 @@ class Propagation(Pulse):
                         method ='RK23', # method of integration 23
                         #t_eval =np.linspace(z, z+h, size_array), # points where the sol. is stored
                         rtol =1e-8 , # relative accuracy
-                        args =[self.gamma, self.P0, self.T0, self.alpha, self.beta2, self.beta3]) # arguments for the function
+                        args =[self.gamma, self.P0, self.T0, self.alpha, self.beta2, self.beta3]) 
+                        # arguments for the function
             Utemp = sol.y.T[-1] #value at z+h
             Uwtemp = np.fft.fftshift(np.fft.ifft(Utemp))
             Utemp = np.fft.fft(np.fft.fftshift(np.exp((h/2)*Dw)*Uwtemp))
@@ -395,7 +410,8 @@ class Propagation(Pulse):
         #                         figure=env_fig.update_layout(
         # ))        
 
-    def plot_envelope_GVD(self, mode = 'time', xrange = [-8, 8],  yrange = [0, 1.1], size_img = 600, color = 'darkgreen' ):
+    def plot_envelope_GVD(self, mode = 'time', xrange = [-8, 8],  yrange = [0, 1.1],
+    size_img = 600, color = 'darkgreen' ):
         if mode == 'time':
             intensity = self.UI
             x = self.T/self.T0
@@ -517,7 +533,8 @@ def plot_chirp(pulse1, pulse2, pulse3, xrange = [-2.5, 2.5], yrange = [-3, 3], s
                             )
     return spm_chirp
 
-def plot_envelope_x2(pulse1, pulse2, mode = 'time', z0 = 0, xrange = [-8, 8], yrange = [0, 1.1], size_img = 600):
+def plot_envelope_x2(pulse1, pulse2, mode = 'time', z0 = 0, xrange = [-8, 8],
+yrange = [0, 1.1], size_img = 600):
     if mode == 'time':
         intensity1 = pulse1.UI
         intensity2 = pulse2.UI
@@ -652,3 +669,4 @@ def multiplots_2D(*pulses, mode = 'time', z0 = 0, xrange = [-8, 8],  yrange = [0
     else:
         raise ValueError("Mode '{0}' not found. Modes available 'time' or 'spectrum'.".format(mode) )
 \end{minted}
+%\end{footnotesize}

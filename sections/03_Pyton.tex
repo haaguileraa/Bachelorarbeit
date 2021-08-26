@@ -220,6 +220,8 @@
             \frac{\partial U}{\partial z} = \left( \hat{\mathcal{D}} + \hat{\mathcal{N}} \right) U \ . 
         \end{equation}
         
+        Here comes the symmetric SSFM of Equation \eqref{eq_azh2}. After running the calculation of the first $h/2$ section, one can implement the \emph{solve\_ivp()} function of Scipy\footnote{\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}{Scipy documentation}}. The method used is the Explicit Runge-Kutta method of order 3(2), \emph{'RK23'}, as integration scheme and afterwards comes the next $h/2$ segment. The result is sampled and stored on both time and frequency domains. 
+        
         It is now reasonable to introduce the parameter N, whose integer values give the soliton order:
         
         \begin{equation}\label{eq_n}

@@ -1,5 +1,7 @@
 \chapter{Results}
+    At the early stages of testing and debugging, the pulse class (called in the Dash's app to plot and update with the callbacks) had to be necessarily declared as global. The global definition of this variable allowed us to share the results of the propagation's computation with the callback in charge of plotting the envelope without needing to trigger a new calculation for each value of z. That means that we have to treat the pulse envelope's plots and the heatmaps separately to avoid slower interactions in the app. This use of global variables is very effective while working locally, even though it led to problems when the app is used on different devices or browsers, affecting the results of all users at the same time.
 
+According to Dash's documentation\footnote{\href{https://dash.plotly.com/sharing-data-between-callbacks}{Sharing Data Between Callbacks}}, the information between callbacks can (and should) be carried by using the Store component. After implementing this fix on the app, tests using a local server with two devices (local machine using two different web-browsers and a smartphone) showed that the problem didn't persist.
     \section{Deployment of the web-tool}
         \subsection{Heroku (Free servers)}
         \subsection{Prof. Joly's Web}
