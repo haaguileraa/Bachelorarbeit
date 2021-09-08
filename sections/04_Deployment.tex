@@ -1,14 +1,36 @@
 \chapter{Results}
     At the early stages of testing and debugging, the pulse class (called in the Dash's app to plot and update with the callbacks) had to be necessarily declared as global. The global definition of this variable allowed us to share the results of the propagation's computation with the callback in charge of plotting the envelope without needing to trigger a new calculation for each value of z. That means that we have to treat the pulse envelope's plots and the heatmaps separately to avoid slower interactions in the app. This use of global variables is very effective while working locally, even though it led to problems when the app is used on different devices or browsers, affecting the results of all users at the same time.
 
-According to Dash's documentation\footnote{\href{https://dash.plotly.com/sharing-data-between-callbacks}{Sharing Data Between Callbacks}}, the information between callbacks can (and should) be carried by using the Store component. After implementing this fix on the app, tests using a local server with two devices (local machine using two different web-browsers and a smartphone) showed that the problem didn't persist.
+According to Dash's documentation\footnote{\href{https://dash.plotly.com/sharing-data-between-callbacks}{Sharing Data Between Callbacks}}, the information between callbacks can (and should) be carried by using the Store component. After implementing this fix on the app, tests using a local server with two devices (local machine using two different web-browsers and a smartphone) showed that the problem didn't persist. Figures \ref{fig:herokugvd} to \ref{fig:herokunlse} in Appendix \ref{Appendixapp} show the Dash layout. 
+
+Each web app links the other two to connect the three previously discussed regimes divided by "GVD," "SPM," and "NLSE" apps. These applications were tested in a debugging mode to assure that they operate correctly and check their performance.  The right assignation of memory is then meaningful while using the Dash's Store component. For instance, the size of the variables stored locally shouldn't exceed 2MB for most of the environments (up to 10 MB for desktop webbrowsers), as stated by Plotly\footnote{\url{https://dash.plotly.com/dash-core-components/store}}. The arrays containing the data of the intensities in time and spectrum were selected to size approximately 0.813MB each, whose length is 13x8192 points. Besides, the array sampling the z values has a byte-size of 208B for 13 sampled points (taken from the 250 steps of the SSFM), which operates very fluently for local use. Subsequently, tests on an Android device, as well as on a computer, showed that the app is ready to deploy. We carried the examinations using Chrome, Firefox, and Edge on a laptop; and Chrome and Firefox on an Android device.
+
+% SIZE:  1704056 1704056 312
+% Size:  (26, 8192) (26, 8192) (26,)
+% Type:  float64 float64 float64
+
+
+% SIZE:  852088 852088 208
+% Size:  (13, 8192) (13, 8192) (13,)
+% Type:  float64 float64 float64
+
+
     \section{Deployment of the web-tool}
         \subsection{Heroku (Free servers)}
+            Let us now turn our attention to the deployment of this app and its distribution to the final users. The first step is to test the app using a free service such as Heroku. Thereupon we set the git repository and structured the app following Dash's/Plotly's instructions\footnote{\url{https://dash.plotly.com/deployment}}. The deployment presented some problems concerning responsitivity and calculation time. In consequence, the number of steps for SSFM had to be downscaled from 250 to 100 points. Finally, the app (under the name of pulse\_app) was released using the European region and is located at the following link: \url{https://pulse-app-mpsp.herokuapp.com/apps/nlse}.
+            
+            The Dash environment allows printing the shown plots; besides, pushing the button "Download parameters as text" triggers a download of a '.txt' file containing all the parameters used at that exact point.
+    
+       
+        
+        
+        
         \subsection{Prof. Joly's Web}
-
+        Hosting with our own 
 
 
 
 \chapter{Conclusion}
     \section{Feedback from students}
     \section{Future work}
+    

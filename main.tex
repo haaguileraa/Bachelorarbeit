@@ -53,7 +53,7 @@
     %associate-group={}, % When the thesis is done in cooperation with another chair, add it here
     %associate-group-institute={}, % add cooperating institute or university here
     seminar={Photonik}, % The title of your seminar
-    submission-date={2021-05-01} % The date you handed in your document: Format yyyy-mm-dd
+    submission-date={2021-10-04} % The date you handed in your document: Format yyyy-mm-dd
     %primary-logo={}, % Uses the FAU logo by default
     %primary-logo-height={}, % Uses 16mm as default height
     %secondary-logo={}, % Logo of the secondary institution (cooperating chair/university), USES Faculty logo by default
@@ -79,16 +79,16 @@
     \listoffigures
 
     % List of tables (if you have tables)
-    \listoftables
+    %\listoftables
     
     % List of listings (if you have listings)
-	\lstlistoflistings
+	%\lstlistoflistings
 
     % List of abbreviations (if you use acronyms)
     \listofabbreviations
 
     % List of symbols (if you use symbols)
-    \listofsymbols
+    %\listofsymbols
 	
 	% Abstract
 	%
@@ -124,7 +124,9 @@
     % Appendix
      \begin{appendix}
         % In the appendices, use \section{} instead of \chapter{}
+         \input{appendices/appendix}
          \input{appendices/initvariables}
+         
      \end{appendix}
 
 

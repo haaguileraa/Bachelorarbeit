@@ -1,4 +1,4 @@
-\chapter{Creation of the Web-tool}
+\chapter{Experimentation and design}
 
 
 
@@ -220,7 +220,7 @@
             \frac{\partial U}{\partial z} = \left( \hat{\mathcal{D}} + \hat{\mathcal{N}} \right) U \ . 
         \end{equation}
         
-        Here comes the symmetric SSFM of Equation \eqref{eq_azh2}. After running the calculation of the first $h/2$ section, one can implement the \emph{solve\_ivp()} function of Scipy\footnote{\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}{Scipy documentation}}. The method used is the Explicit Runge-Kutta method of order 3(2), \emph{'RK23'}, as integration scheme and afterwards comes the next $h/2$ segment. The result is sampled and stored on both time and frequency domains. 
+        Here comes the symmetric SSFM of Equation \eqref{eq_azh2}. After running the calculation of the first $h/2$ section, one can implement the \emph{solve\_ivp()} function of Scipy\footnote{\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}{Scipy documentation}}. The method used is the Explicit Runge-Kutta method of order 3(2), \emph{'RK23'}, as integration scheme and afterwards comes the next $h/2$ segment with the dispersion. The result is sampled and stored on both time and frequency domains. 
         
         It is now reasonable to introduce the parameter N, whose integer values give the soliton order:
         
@@ -229,7 +229,7 @@
         \end{equation}
         
         
-        Depending on the value of \emph{N}, the SPM or GVD effects are more significant through the fiber. Some examples are carried by Agrawal \citep{AgrawalBook} for N = 0 (No SPM) and N = 1, then we compared them against the results we obtained with our code (figures \ref{fig:n1pb} and \ref{fig:n1nb}). 
+        Depending on the value of \emph{N}, the SPM or GVD effects are more significant through the fiber. Some examples are carried by Agrawal \citep{AgrawalBook} for N = 0 (No SPM) and N = 1, then we compared them against the results we obtained with our code (figures \ref{fig:n1pb} and \ref{fig:n1nb}). The outcome is an evolution of the shape pulses, and the optical spectra appearing to be the same as those given in \citep{AgrawalBook}. Even though further experiments can grant a verification of the model.
         
          \begin{figure}[label={fig:n1pb}, caption={Solution of the NLSE using SSFM for N=1 and $\beta_2 > 0$.}]
          \centering	
@@ -302,7 +302,7 @@
         \end{tabular}
         \end{figure}
 
-    Following \citep{stolen}, the frequency spectra of a Gaussian pulse dependent on some values of maximum phase-shift is expected to be as given in figure \subref{fig:spmstol}. Figures \subref{fig:spm0pi}-\subref{fig:spm35pi} present the result of the function \emph{split\_step()} in the absence of dispersive effects (or close to the zero-dispersion region). The results of the code are very close to such shapes expected to get. The calculations were carried for a pulse $T_0 = 1ps$ in a lossless fiber with a length $L = 500m$, and $h = 0.004*L$ (250 steps).
+    Following \citep{stolen}, the frequency spectra of a Gaussian pulse dependent on some values of maximum phase-shift is expected to be as given in figure \ref{fig:spmstol}. Figures \ref{fig:spm0pi}-\ref{fig:spm35pi} present the result of the function \emph{split\_step()} in the absence of dispersive effects (or close to the zero-dispersion region). The results of the code are very close to such shapes expected to get. The calculations were carried for a pulse $T_0 = 1ps$ in a lossless fiber with a length $L = 500m$, and $h = 0.004*L$ (250 steps).
     
      \begin{figure}[label={fig:spmssfm}, caption={Shape of the spectra for Gaussian pulses by maximum phase shift ($\phi_{NL}$).}]
          \centering	
@@ -376,7 +376,7 @@
         \end{figure}
     
     \subsection{GVD code for python}
-    The code responsible for providing the app for only dispersive effects to the user is the file \emph{gvd.py} (Appendix B). This code uses either 'only\_gvd' or 'gauss\_gvd' as solution type. The class is then in charge of using the methods previously mentioned in section \ref{subsect:gvd}. Sliders allow to change the values of $\beta_2$, initial chirp, m, and z, while a switch changes between Gaussian and Sech. In addition, the callbacks are always returning the actual state of the values along with the new calculated plots.  A simple block diagram of this page is presented in figure \ref{fig:gvddash}.
+    The code responsible for providing the app for only dispersive effects to the user is the file \emph{gvd.py} (Appendix B). This code uses either 'only\_gvd' or 'gauss\_gvd' as solution type. The class is then in charge of using the methods previously mentioned in section \ref{subsect:gvd}. Sliders allow changing  the values of $\beta_2$, initial chirp, m, and z, while a switch changes between Gaussian and Sech. In addition, the callbacks are always returning the actual state of the values along with the new calculated plots.  A simple block diagram of this page is presented in figure \ref{fig:gvddash}.
         
     \begin{figure}[label={fig:gvddash}, caption={Simplified Block-Diagram of gvd.py}]
           %  \caption*{Source: Some Source}

@@ -264,14 +264,14 @@ Loss and dispersion originated by interactions of the electromagnetic field with
     \end{equation}
 
         
-    \subsection{NLSE}
+    \subsection{Nonlinear Schrödinger Equation}
         According to \citep{AgrawalBook}, the equation  \eqref{eq_b} for the slowly varying envelope can be simplified for pulses of width $T_0 > 5 ps$ to
         \begin{equation}
                 \frac{\partial A}{\partial z} = -\frac{\alpha}{2}A-j \frac{\beta_2}{2}\frac{\partial^2A}{\partial T^2}+j\gamma|A|^2 A,
                 \label{eq_nlse}
             \end{equation}
             \ \\
-       It is noteworthy that the contribution of the third-dispersion term should be considered if $\beta_2 \approx 0$ (zero-dispersion region). Equation \eqref{eq_nlse} is known as the nonlinear Schrödinger equation (NLSE).
+       It is noteworthy that the contribution of the third-dispersion term should be considered if $\beta_2 \approx 0$ (zero-dispersion region). Equation \eqref{eq_nlse} is known as the nonlinear \gls{NLSE}. %Schrödinger equation (NLSE).
 
            Following the convention used in \cite{AgrawalBook}, \cite{dudley_taylor_2010} , the continuous inverse Fourier transform of the slowly varying function of z is
         
@@ -281,7 +281,7 @@ Loss and dispersion originated by interactions of the electromagnetic field with
         \end{equation}
         
         
-        The FFT is an algorithm capable of calculating the discrete Fourier transform faster \citep{Lynch2018}. The definition of \href{https://numpy.org/doc/stable/index.html}{Numpy} of the inverse DFT as \cite{dft} says is 
+        The \Gls{FFT} is an algorithm capable of calculating the \Gls{DFT} faster \citep{Lynch2018}. The definition of \href{https://numpy.org/doc/stable/index.html}{Numpy} of the inverse \Gls{DFT} as \cite{dft} says is 
         \begin{equation}\label{eq_dft}
             a_n = \frac{1}{n}\sum_{k=0}^{n-1} A_k \ exp\left\{ 2\pi i \frac{mk}{n} \right\} \qquad m = 0,...,n-1,
         \end{equation}
@@ -313,7 +313,7 @@ Loss and dispersion originated by interactions of the electromagnetic field with
             \label{eq_Ds}
         \end{equation}
         
-        Depending on the value of the GVD parameter, either shows the fiber a normal dispersion ($\beta_2 > 0$ , $D<0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$ , $D>0$).
+        Depending on the value of the \Gls{GVD} parameter, either shows the fiber a normal dispersion ($\beta_2 > 0$ , $D<0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$ , $D>0$).
         
         Linear solitons can reduce this effect, even though there are several methods to compensate chromatic dispersion, as \cite{AgrawalBook}, \cite{dudley_taylor_2010},  and \citep{Udayakumar2013ChromaticDC} explain.
         \gls{DCF}, Fiber Bragg Grating (FBG), and Optical Phase Conjugator (OPC) are some of the methods used.
