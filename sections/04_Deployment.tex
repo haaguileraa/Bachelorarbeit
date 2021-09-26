@@ -1,4 +1,5 @@
 \chapter{Results}
+\label{results}
     At the early stages of testing and debugging, the pulse class (called in the Dash's app to plot and update with the callbacks) had to be necessarily declared as global. The global definition of this variable allowed us to share the results of the propagation's computation with the callback in charge of plotting the envelope without needing to trigger a new calculation for each value of z. That means that we have to treat the pulse envelope's plots and the heatmaps separately to avoid slower interactions in the app. This use of global variables is very effective while working locally, even though it led to problems when the app is used on different devices or browsers, affecting the results of all users at the same time.
 
 According to Dash's documentation\footnote{\href{https://dash.plotly.com/sharing-data-between-callbacks}{Sharing Data Between Callbacks}}, the information between callbacks can (and should) be carried by using the Store component. After implementing this fix on the app, tests using a local server with two devices (local machine using two different web-browsers and a smartphone) showed that the problem didn't persist. Figures \ref{fig:herokugvd} to \ref{fig:herokunlse} in Appendix \ref{Appendixapp} show the Dash layout. 
@@ -25,12 +26,14 @@ Each web app links the other two to connect the three previously discussed regim
         
         
         
-        \subsection{Prof. Joly's Web}
-        Hosting with our own 
+        \subsection{Max Planck School of Photonics' learning platform}
+        During the assessment and definition of objectives for this thesis, we evaluated the possibility of hosting the final app in a platform such as the virtual campus of \gls{MPSP}. Despite this, after some research, we concluded that it is not possible to host or build a Python-based app directly on Moodle-like platforms such as the one previously mentioned. Nevertheless, it is possible to embed Python/Dash's layouts inside those services using the "src" attribute of HTML to post the app hosted in a service similar to Heroku.
+         
 
 
 
 \chapter{Conclusion}
-    \section{Feedback from students}
+    
+    \section{Hosting the server}
     \section{Future work}
     

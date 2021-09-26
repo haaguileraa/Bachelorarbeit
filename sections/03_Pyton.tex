@@ -1,9 +1,9 @@
 \chapter{Experimentation and design}
-
+\label{python}
 
 
  \section{Modeling the short  pulse propagation}
-    In order to have an easier understanding of the physical processes involved in the propagation of short pulses in a medium, it will be first necessary to focus on the dispersion that affects this medium. The purpose of this section is to consider the fiber as a linear optical medium while studying the pulse-propagation problem. Thus, it is possible to inspect the effect of GVD under certain circumstances where it dominates over the nonlinearities \citep{ AgrawalBook}. A further objective of this thesis is to implement a code capable of illustrating the Dispersion-induced broadening of optical pulses for both Gaussian and Hyperbolic-Secant (Sech) shapes.
+    In order to have an easier understanding of the physical processes involved in the propagation of short pulses in a medium, it will be first necessary to focus on the dispersion that affects this medium. The purpose of this section is to consider the fiber as a linear optical medium while studying the pulse-propagation problem. Thus, it is possible to inspect the effect of GVD under certain circumstances where it dominates over the nonlinearities \citep{ AgrawalBook}. A further objective of this thesis is to implement a code capable of illustrating the dispersion-induced broadening of optical pulses for both Gaussian and Hyperbolic-Secant (Sech) shapes.
 
 
     In this work, the normalized amplitude \emph{U} will be used and is obtained from  
@@ -16,10 +16,10 @@
                 \tau =  \frac{T}{T_0} = \frac{t-z/v_g}{T_0} \ ,
             \end{equation}
         
-        which is the time scale scaled to the input pulse width $T_0$.
+        which refers to the time scaling function, scaled with the input pulse width $T_0$.
         
         
-        It is important to define relative lengths in order to understand the effect of the dispersion and/or nonlinearities on a pulse propagation
+        It is important to define relative lengths in order to understand the effect of the dispersion and/or nonlinearities on a pulse propagation, namely
             \ \\
             \ \\
             \begin{equation}
@@ -45,10 +45,10 @@
         Supposing a fiber length L such as $L \sim L_D$, $L << L_{NL}$, and setting $\gamma = 0$:  the equation \eqref{eq_nlse} becomes 
         
          \begin{equation}\label{eq_ugvd}
-            \frac{\partial U}{\partial z} = -j\frac{\beta_2}{2}\frac{\partial^2U}{\partial T^2}.
+            \frac{\partial U}{\partial z} = -i\frac{\beta_2}{2}\frac{\partial^2U}{\partial T^2}.
         \end{equation}
 
-        It is now necessary to define the incident field for the gaussian-like and the hyperbolic-Secant-like Pulses as 
+        It is now necessary to define the incident field for the gaussian-like and the hyperbolic-secant-like pulses as 
             
         \begin{equation}\label{eq_u0t}
             U(0,T) = 
@@ -59,7 +59,7 @@
             \end{cases}
         \end{equation}
         
-         Here are considered the initial chirp C for both types of pulses and the generalization for a supper-gaussian pulse, where m = 1 represents a chirped Gaussian pulse.
+         Here are considered the initial chirp C for both types of pulses and the generalization for a super-Gaussian pulse, where m = 1 represents a standard chirped Gaussian pulse.
         
         
         Recalling the Fourier-transform method \eqref{eq_acft}, the equation \eqref{eq_ugvd} turns out to be the ordinary differential equation
@@ -90,9 +90,9 @@
             U(z,T) = \frac{T_0}{(T^2_0 - i \beta z)^{1/2}} exp \left( -\frac{T^2}{2(T^2_0 - i \beta z)} \right) \ .
         \end{equation}
         
-        This formula has fewer computational steps and was also added to the code to compare the results.  It is worth mentioning that the equation \eqref{eq_ugvdg} is only valid for unchirped  Gaussian pulses.
+        This formula has fewer computational steps and was also added to the code to compare the results against the generalized form.  It is worth mentioning that the equation \eqref{eq_ugvdg} is only valid for unchirped  Gaussian pulses.
              
-        Having these equations and using \href{https://numpy.org/}{Numpy}, was written a code to plot the pulse evolution. This code allows the user to change values like $\beta_2$ to see the dispersion-induced broadening. 
+        Having these equations and using \href{https://numpy.org/}{Numpy}, the code was written to plot the pulse evolution. This module allows the user to change values like $\beta_2$ to see the dispersion-induced broadening. 
         
         \begin{figure}[label={fig:gvdmtp}, caption={Effect of GVD in a Gaussian pulse following Eq. \eqref{eq_ugvdg}.}]
         \centering
@@ -139,16 +139,16 @@
                 \frac{\partial U}{\partial z} = j\frac{e^{-\alpha z}}{L_{NL}}|U|^2 U \ ,
             \end{equation}
             %seite 98
-            which phase shift can be defined as 
+            whose phase shift can be defined as 
             \begin{equation} \label{eq_phi}
                 \phi_{NL}(L,T) = |U(0,T)|^2 (L_{eff}/L_{NL})
             \end{equation}
             with 
             \begin{equation} \label{eq_leff}
-                L_{eff} = \frac{1-e^{-\alpha L}}{\alpha} \ .
+                L_{eff} = \frac{1-e^{-\alpha L}}{\alpha} \ ,
             \end{equation}
             
-            If  $\alpha = 0$, then $L_{eff} = L$.
+              and if  $\alpha = 0$, then $L_{eff} = L$.
             
             That allow us to introduce the SPM-induced chirp as
             
@@ -157,12 +157,12 @@
             \end{equation}
         
         
-         and generalized for a super-Gaussian pulse:
+         and generalized for a super-Gaussian pulse following:
             \begin{equation} \label{eq_spmchirpsg}
                 \delta \omega(T) = \frac{2m L_{eff}}{T_0 L_{NL}}\left( \frac{T}{T_0}\right)^{2m-1}  exp\left\{ -\left( \frac{T}{T_0}\right)^{2m}   \right\}
             \end{equation}
         
-        The code in Appendix \ref{sec:initvariables} uses the equations \eqref{eq_spmchirp} and \eqref{eq_spmchirpsg} for the Gaussian pulses. The integration can be carried using either the Euler's mid-point method \citep{euler} (function \emph{mid\_step(x0, f, T, *args)}), or the function cumtrapz\footnote{\href{https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.cumtrapz.html}{Scipy documentation for 'cumtrapz'}}. For Hyperbolic-Secant pulses the process starts using the equation \eqref{eq_phi}, and its derivative gives as result the SPM-induced chirp. Figures \ref{fig:spmsg} and \ref{fig:spmsech} show the effect of SPM with $L_{eff} = L_{NL}$ \citep{AgrawalBook} on Gaussian and Sech pulses, respectively. The plots were made with Matplotlib and function \emph{incident\_field\_spm()} of the code.
+        The code in Appendix \ref{sec:initvariables} uses the equations \eqref{eq_spmchirp} and \eqref{eq_spmchirpsg} for the Gaussian pulses. The integration can be carried using either the Euler's mid-point method \citep{euler} (function \emph{mid\_step(x0, f, T, *args)}), or the function cumtrapz\footnote{\href{https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.cumtrapz.html}{Scipy documentation for 'cumtrapz'}}. For Hyperbolic-Secant pulses the process starts using the equation \eqref{eq_phi}, and its derivative gives as result the SPM-induced chirp. Figures \ref{fig:spmsg} and \ref{fig:spmsech} show the effect of SPM with $L_{eff} = L_{NL}$ \citep{AgrawalBook} on Gaussian and Sech pulses, respectively. The plots were made with Matplotlib and the function \emph{incident\_field\_spm()} of the code.
         
         
         
@@ -207,7 +207,7 @@
         \end{figure}
         
         \subsection{Solution of the NLSE (SSFM)}\label{subsec:nlse}
-            To initially solve the NLSE through the SSFM, the equations to follow are \eqref{eq_dpn}, \eqref{eq_dhat}, and \eqref{eq_nhat}. As the objective of this project is to create an interactive web tool with learning purposes, we avoided some calculations related to Raman Scattering and other nonlinear effects. Thus, equation \eqref{eq_nhat} turns out to be 
+            To initially solve the NLSE through the SSFM, the equations to follow are \eqref{eq_dpn}, \eqref{eq_dhat}, and \eqref{eq_nhat}. As the objective of this project is to create an interactive web tool with learning purposes, we avoided some calculations related to Raman Scattering and other nonlinear effects. In addition, the size of the step and, ergo, the total quantity of steps can be downscaled to obtain faster results. Thus, equation \eqref{eq_nhat} turns out to be 
             \begin{equation} \label{eq_nhat2}
              \hat{\mathcal{N}} = i \left( 
              %\frac{e^{-\alpha z} \gamma P_0 T^2_0}{\left|\beta_2\right|} \left|U\right|^2 
@@ -220,16 +220,16 @@
             \frac{\partial U}{\partial z} = \left( \hat{\mathcal{D}} + \hat{\mathcal{N}} \right) U \ . 
         \end{equation}
         
-        Here comes the symmetric SSFM of Equation \eqref{eq_azh2}. After running the calculation of the first $h/2$ section, one can implement the \emph{solve\_ivp()} function of Scipy\footnote{\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}{Scipy documentation}}. The method used is the Explicit Runge-Kutta method of order 3(2), \emph{'RK23'}, as integration scheme and afterwards comes the next $h/2$ segment with the dispersion. The result is sampled and stored on both time and frequency domains. 
+        Here comes the symmetric SSFM of Equation \eqref{eq_azh2}. After running the calculation of the first $h/2$ section, one can implement the \emph{solve\_ivp()} function of Scipy\footnote{\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}{Scipy documentation}}. The method used is the Explicit Runge-Kutta method of order 3(2) \emph{'RK23'} as integration scheme, followed afterwards by the next $h/2$ segment with the dispersion. The result is sampled and stored on both time and frequency domains. 
         
         It is now reasonable to introduce the parameter N, whose integer values give the soliton order:
         
         \begin{equation}\label{eq_n}
-            N^2 = \frac{L_D}{L_{NL}} = \frac{\gamma P_0 T^2_0 \ . }{\left|\beta_2\right|}
+            N^2 = \frac{L_D}{L_{NL}} = \frac{\gamma P_0 T^2_0  }{\left|\beta_2\right|}\ .
         \end{equation}
         
         
-        Depending on the value of \emph{N}, the SPM or GVD effects are more significant through the fiber. Some examples are carried by Agrawal \citep{AgrawalBook} for N = 0 (No SPM) and N = 1, then we compared them against the results we obtained with our code (figures \ref{fig:n1pb} and \ref{fig:n1nb}). The outcome is an evolution of the shape pulses, and the optical spectra appearing to be the same as those given in \citep{AgrawalBook}. Even though further experiments can grant a verification of the model.
+        Depending on the value of \emph{N}, the SPM or GVD effects are more significant through the fiber. Some examples are carried by Agrawal \citep{AgrawalBook} for N = 0 (No SPM) and N = 1, then we compared them against the results we obtained with our code (figures \ref{fig:n1pb} and \ref{fig:n1nb}), whose outcome is an evolution of the shape pulses, and the optical spectra appearing to be the same as those given in \citep{AgrawalBook}. Even though further experiments can grant a verification of the model.
         
          \begin{figure}[label={fig:n1pb}, caption={Solution of the NLSE using SSFM for N=1 and $\beta_2 > 0$.}]
          \centering	
@@ -360,7 +360,7 @@
 \section{Web-Tool}
     Following the experience with the Fiber-mode App (previous chapter), Dash/Plotly works as a framework to build the web interface for the code written in Python. Other options such as Bokeh\footnote{\url{https://bokeh.org/}}  were considered, even though Dash did not present problems with some of the types of data used. In addition, it allows us to present intuitive and cleaner plots. 
     
-    This open-source Python library has the advantage of providing a reactive app, which will allow the students (or general users) to use it on browsers regardless of the device and operative system, i.e., smartphones (Android, IOS, etc.), tablets, computers, etc. Thus, we implement the theories of interactive learning and strive to provide an online tool (additional to the lectures, books, and illustrations) to aid the students and, expectedly, motivate them to understand the effects involved in the propagation of short pulses on fibers. 
+    This open-source Python library has the advantage of providing a reactive app, which will allow the students (or general users) to use it on browsers regardless of the device and operative system, i.e., smartphones (Android, IOS, etc.), tablets, computers, etc. Thus, we implement the theories of interactive learning and strive to provide an online tool (additional to the lectures, books, and illustrations) to aid the learners and, expectedly, motivate them to understand the effects involved in the propagation of short pulses on fibers. 
     The purpose of deploying this additional content online is to reach the necessities of most of the target population. Last year several universities around the globe had to do online teaching, and many activities of students' life migrated to the online aspect \citep{Hassel2020}. The average students possess (now more than ever) access to the internet, and, additionally, most of them have experience using online apps. Now, one can say that the app is accessible and flexible due to the previously mentioned characteristics. However, the intuitive part comes while developing the user interface. The application should help the user learn from it without vast information or 'how-to' tutorials. Consequently, it is crucial to place elements like buttons, sliders, or plots correctly. Figure \ref{fig:appdash} shows the global structure of the code. 
     
     \begin{figure}[label={fig:appdash}, caption={Global structure of the code.}]

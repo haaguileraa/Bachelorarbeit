@@ -1,6 +1,6 @@
 \chapter{Theoretical Framework}
 
-This chapter reviews the actual state and the basis of the e-learning, as well as the theoretical base to model ultrashort-pulse propagation in fibers. Spectral and time broadening are fundamental aspects of nonlinear fiber optics. Understanding their basis and how they affect the propagation of an electromagnetic wave is an essential factor to both develop the code and test its effectiveness. Providing an overview of the equations describing the light propagation in a dispersive, nonlinear medium gives the principles to see what is solved with the back-end code at further stages in this thesis project.
+This chapter reviews the actual state and the basis of the e-learning, as well as the theoretical base to model ultrashort-pulse propagation in fibers. Spectral and time broadening are fundamental aspects of nonlinear fiber optics, understanding their basis and how they affect the propagation of an electromagnetic wave is an essential factor to both develop the code and test its effectiveness. Providing an overview of the equations describing the light propagation in a dispersive, nonlinear medium gives the principles to see what is solved with the back-end code at further stages in this thesis project.
 
 
 
@@ -15,21 +15,22 @@ Constructivism is a theory of cognition that proposes using unconventional instr
 
 
 \subsection{E-Learning}
-The increasing quantity of online, partially online, or presential courses with strong online interactions strives to supply the necessity from a generation of students (with a strong influence of technology and social networks) to incorporate E-Learning in the teaching methods and the learning environments.  According to \cite{vltool}: "interactivity is a key feature of online education which helps attract and retain students in online classes," thus applying visual learning tools together with an online learning experience can develop engagement and motivation in the learning process in students. 
+The increasing quantity of online, partially online, or presential courses with strong online interactions strives to supply the necessity from a generation of learners (with a strong influence of technology and social networks) to incorporate E-Learning in the teaching methods and the learning environments.  According to \cite{vltool}: "interactivity is a key feature of online education which helps attract and retain students in online classes," thus applying visual learning tools together with an online learning experience can develop engagement and motivation in the learning process in students. 
 
 One can refer then to E-Learning as "the use of both software-based and online learning"  \cite{tabak} and, according to \cite{tabak}, \cite{munoz}, it has to be flexible, accessible, and intuitive. Hence factors like clear instructions, the relevance of the topics, the requirements to use its tools, and the difficulty to use them are crucial to implementing E-learning in different courses for different levels of education.
 
 \section{Background: Interactive Learning tools}
 
-Enhancing the students' learning experience regardless of the education level can be achieved using different interactive E-Learning tools, e.g., Web sites like Mathweb or mobile apps like I-MMAAPS. The interface of the interactive and personalizable content of these tools is essential to create a successful and effective tool \cite{vltool}. Therefore it should also be taken into account while creating an interactive E-Learning tool. Chapters 1 and 2 discuss how the interface was designed  and how a group of students perceived it.\textbf{ (give more details at the end of the project). }
+Enhancing the students' learning experience regardless of the education level can be achieved using different interactive E-Learning tools, e.g., Web sites like Mathweb or mobile apps like I-MMAAPS. The interface of the interactive and personalizable content of these tools is essential to create a successful and effective tool \cite{vltool}. Therefore it should also be taken into account while creating an interactive E-Learning tool. Chapter \ref{python} discusses how the interface was designed and Appendix \ref{Appendixapp} shows a preview of it.
+%and how a group of students perceived it.\textbf{ (give more details at the end of the project). }
 
 
 
-\subsection{examples of Interactive Learning tools}
+\subsection{Examples of Interactive Learning tools}
 To know more about interactive learning is imperative to look at previous works and how they can contribute to the creation of new tools like the one discussed in this thesis.
 
 \subsubsection{Mathweb}
-The Hochschule Ruhr West has developed a website named \href{https://mathweb.de/}{"Mathweb"}   to support the students during the semester and preparation for the exams. According to surveys,  students underestimate the continuous study (during and after evaluations), among other problems related to learning strategies, that led to the endorsement of this Web amongst the students who, after the trial period, see it as a helpful tool and perceive a positive impact in their studies \cite{MathWeb}.
+The Hochschule Ruhr West has developed a website, namely \href{https://mathweb.de/}{Mathweb},   to support the students throughout the semester and during their preparation for the exams. According to surveys,  students underestimate the continuous study (during and after evaluations) and manifest other problems related to learning strategies. That led to the endorsement of this Web amongst the students who, after the trial period, saw it as a helpful tool and perceive a positive impact in their studies \cite{MathWeb}.
 
 On this website are available a wide variety of examples, interactive demonstrations with graphics, explanations, exercises, and the option to check if the solution given by the user is correct. The themes included going from simple mathematical operations to more complex topics like derivatives are available for everyone, even though the test course cannot be accessed signed in as a guest.
 
@@ -58,7 +59,7 @@ The conclusion of this research points that this app helps developing interest a
 
 
 \subsubsection{Control courses}
-Björn Wittenmark, Helena Haglund, and Mikael Johansson at Lund Institute of Technology used interactive learning and dynamic pictures to aid the students while learning abstract parts of the theory in control courses. The goal was not just to have students with a solid theoretical understanding of the topics but also to have high engineering capabilities; this relies on the good connection of the theory by improving the comprehension of the students and the practical aspect of the problems presented. One way to achieve this is with material available "anywhere and anytime" using the web and Matlab and Simulink for the computations. 
+Björn Wittenmark, Helena Haglund, and Mikael Johansson at Lund Institute of Technology used interactive learning and dynamic pictures to aid the students while learning abstract parts of the theory in control courses. The goal was not just to have students with a solid theoretical understanding of the topics but also to have high engineering capabilities; this relies on the good connection of the theory by improving the comprehension of the students and the practical aspect of the problems presented. One way to achieve this is with material available "anywhere and anytime" using the web, and Matlab and Simulink for the computations. 
 
 They implemented dynamic pictures where the user can see the effect of, e.g., changing a parameter in continuous-time poles and zeroes plots without typing commands. Drags, dropdowns, text input slots, and buttons enhance the graphical interface of the CCSDEMO. This tool makes active learning possible covering topics like robustness, tuning of PID-controllers, observability, among other subjects of the 13 available modules. They highlight the idea that it is meaningful to design the interface carefully to allow an intuitive use avoiding the need to read a manual and contributing to the utilization without supervision.
 
@@ -155,7 +156,7 @@ In conclusion, dynamic pictures improve the courses giving the students more too
                         \label{Temode}
                     \end{equation}
         
-        We can solve the eigenvalue problem graphically by plotting W as a function of U [Joly's lecture]. Figure \ref{fig:eigen1} shows this approach where the circle has a radius of V.
+        We can solve the eigenvalue problem graphically by plotting W as a function of U \citep{yariv_b}. Figure \ref{fig:eigen1} shows this approach where the circle has a radius of V.
         
         
         \begin{figure}[label={fig:eigen1}, caption={Visualization of the graphic solution of the eigenvalue problem. Taken from \cite{herokuapp}}]
@@ -171,7 +172,7 @@ In conclusion, dynamic pictures improve the courses giving the students more too
         \end{figure}
         
         
-        Heroku is a web that supports programming languages like Java, Node.js, Python, among others \cite{heorku}. The codes for the planar waveguide and the optical fiber were deployed using its free service.
+        Heroku is a web that allows developers to deploy apps online in a straightforward way. This web supports programming languages like Java, Node.js, Python, among others \cite{heorku}.  The codes for the planar waveguide and the optical fiber were deployed using its free service.
 
     \subsection{Optical Fiber}
     
@@ -313,7 +314,7 @@ Loss and dispersion originated by interactions of the electromagnetic field with
             \label{eq_Ds}
         \end{equation}
         
-        Depending on the value of the \Gls{GVD} parameter, either shows the fiber a normal dispersion ($\beta_2 > 0$ , $D<0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$ , $D>0$).
+        Depending on the value of the \Gls{GVD} parameter on the fiber, it indicates either a normal dispersion ($\beta_2 > 0$ , $D<0$), or it is in the anomalous dispersion regime ($\beta_2 < 0$ , $D>0$).
         
         Linear solitons can reduce this effect, even though there are several methods to compensate chromatic dispersion, as \cite{AgrawalBook}, \cite{dudley_taylor_2010},  and \citep{Udayakumar2013ChromaticDC} explain.
         \gls{DCF}, Fiber Bragg Grating (FBG), and Optical Phase Conjugator (OPC) are some of the methods used.
@@ -322,8 +323,8 @@ Loss and dispersion originated by interactions of the electromagnetic field with
 
     \subsection{Nonlinear Effects}
 
-        Nonlinearities can be effects such as third-harmonic generation, four-wave mixing (FWM). The Kerr nonlinearity $n = n(P_{opt})$
-        can lead to a time-dependent phase delay of the pulse itself, known as self-phase modulation, to a co-propagating pulse, known as cross-phase modulation (XPM), or the formation of a fourth component through up to three light waves with different frequencies (FMW ) \cite{rein}. The refractive index is written as
+        Nonlinearities can be effects such as third-harmonic generation, \gls{FWM}, or \gls{SPM}. The Kerr nonlinearity $n = n(P_{opt})$
+        can lead to a time-dependent phase delay of the pulse itself, namely \gls{SPM}, to a co-propagating pulse, known as \gls{XPM}, or the formation of a fourth component through up to three light waves with different frequencies (\Gls{FWM}) \cite{rein}. The refractive index is written as
         
         
         \begin{equation}
@@ -338,9 +339,9 @@ Loss and dispersion originated by interactions of the electromagnetic field with
     \subsection{Optical Solitons}
     
     
-    Solving the NLSE can involve the appearance of solitons when nonlinear effects (in general arising from the Kerr-effect) act together with the GVD. The invariance of amplitude and velocity is a relevant characteristic of the solitons. However, their phase and position are not invariant \cite{Kodama1994}. 
+    Solving the \gls{NLSE} can involve the appearance of solitons when nonlinear effects (in general arising from the Kerr-effect) act together with the \gls{GVD}. The invariance of amplitude and velocity is a relevant characteristic of the solitons. However, their phase and position are not invariant \cite{Kodama1994}. 
     
-    The existence of dark and bright solitons depends on whether the GVD is in the normal (or positive) regime for the first case or in the anomalous region for the bright type \cite{KIVSHAR199881}, \cite{agr_pap}.  When the amplitude envelope of the pulse has a localized dip of the pulse (whose drop reaches zero intensity), the solution of the NLSE is called a "dark" soliton. These dark-soliton pulses can fade because of the Raman self-scattering, even though the background fluctuations and loss are stronger in bright than in dark solitons \cite{kivshar}. 
+    The existence of dark and bright solitons depends on whether the \gls{GVD} is in the normal (or positive) regime for the first case or in the anomalous region for the bright type \cite{KIVSHAR199881}, \cite{agr_pap}.  When the amplitude envelope of the pulse has a localized dip of the pulse (whose drop reaches zero intensity), the solution of the \gls{NLSE} is called a "dark" soliton. These dark-soliton pulses can fade because of the Raman self-scattering, even though the background fluctuations and loss are stronger in bright than in dark solitons \cite{kivshar}. 
     
     Dark solitons can be converted into bright solitons by employing a micro-ring resonator, which, in turn, is particularly similar to a Fabry Perot resonator \cite{yupapin}. This conversion may have applications for network security (due to the difficult detection of the dark pulse propagating through the port) \cite{darkks}. Using a resonator system with soliton pulses leads to a broadening of the spectrum of light. Its applications can be security imaging, medical tools, multi-color holography, and transparent holography \cite{yupapin}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
@@ -394,7 +395,7 @@ Loss and dispersion originated by interactions of the electromagnetic field with
                 \centering  
 %\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
         
-        \begin{tikzpicture}[x=1.2pt,y=1.2pt,yscale=-1,xscale=1]
+        \begin{tikzpicture}[x=1.2pt,y=1.2pt,yscale=-1.5,xscale=1.5]
         %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
             
             %Rounded Rect [id:dp3852932235223505] 
